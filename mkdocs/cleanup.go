@@ -3,12 +3,13 @@ package main
 import (
 	"bytes"
 	"errors"
-	"fmt"
 	"io/fs"
 	"os"
 	"path/filepath"
 
 	"github.com/creativeprojects/clog"
+	"github.com/pelletier/go-toml/v2"
+	"gopkg.in/yaml.v3"
 )
 
 func cleanupDocs(version string) error {
@@ -39,40 +40,57 @@ func cleanupMD(path string) error {
 	if err != nil {
 		return err
 	}
-	var toml, yaml bool
+	var headerTOML, headerYAML bool
 	var bufferTOML, bufferYAML = &bytes.Buffer{}, &bytes.Buffer{}
+	var lineNum int
 	lines := bytes.Split(content, []byte{'\n'})
-	for lineNum, line := range lines {
+	for _, line := range lines {
+		lineNum++
 		line = bytes.TrimSpace(line)
 		lineStr := string(line)
 		if lineStr == "+++" {
-			clog.Tracef("TOML marker on line %d", lineNum+1)
-			toml = !toml
-			if !toml {
+			clog.Tracef("TOML marker on line %d", lineNum)
+			headerTOML = !headerTOML
+			if !headerTOML {
 				break
 			}
 			continue
 		}
 		if lineStr == "---" {
-			clog.Tracef("YAML marker on line %d", lineNum+1)
-			yaml = !yaml
-			if !yaml {
+			clog.Tracef("YAML marker on line %d", lineNum)
+			headerYAML = !headerYAML
+			if !headerYAML {
 				break
 			}
 			continue
 		}
-		if toml {
+		if headerTOML {
 			bufferTOML.Write(line)
 			bufferTOML.WriteByte('\n')
-		} else if yaml {
+		} else if headerYAML {
 			bufferYAML.Write(line)
 			bufferYAML.WriteByte('\n')
 		}
 	}
+	rewrite := false
+	header := make(map[string]any)
 	if bufferTOML.Len() > 0 {
-		fmt.Println(bufferTOML.String())
+		rewrite = true
+		decoder := toml.NewDecoder(bufferTOML)
+		err = decoder.Decode(&header)
 	} else if bufferYAML.Len() > 0 {
-		fmt.Println(bufferYAML.String())
+		decoder := yaml.NewDecoder(bufferYAML)
+		err = decoder.Decode(&header)
+	}
+	if err != nil {
+		return err
+	}
+	if _, found := header["date"]; found {
+		rewrite = true
+		delete(header, "date")
+	}
+	if rewrite {
+		clog.Debugf("rewrite needed: %+v\n", header)
 	}
 	return nil
 }
