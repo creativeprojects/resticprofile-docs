@@ -2,10 +2,8 @@ package main
 
 import (
 	"flag"
-	"fmt"
-	"io/fs"
 	"os"
-	"path/filepath"
+	"strings"
 
 	"github.com/creativeprojects/clog"
 )
@@ -23,6 +21,13 @@ func main() {
 
 	var err error
 	switch flag.Arg(0) {
+	case "cleanup":
+		version := flag.Arg(1)
+		if version == "" || !strings.HasPrefix(version, "v") {
+			clog.Error("please specify which version to cleanup: mkdocs cleanup v0.18.0")
+			os.Exit(1)
+		}
+		err = cleanupDocs(version)
 	default:
 		err = createSnapshots()
 	}
@@ -30,16 +35,4 @@ func main() {
 		clog.Error(err)
 		os.Exit(1)
 	}
-}
-
-func cleanupDocs(source string) error {
-	return filepath.WalkDir(source, func(path string, d fs.DirEntry, err error) error {
-		if d.IsDir() {
-			return nil
-		}
-		if filepath.Ext(path) == ".md" {
-			fmt.Println(path)
-		}
-		return nil
-	})
 }
