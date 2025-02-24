@@ -6,8 +6,8 @@ weight: 15
 The configuration may be split into multiple files by adding `includes = "glob-pattern"` to the main configuration file. 
 E.g. the following `profiles.conf` loads configurations from `conf.d` and `profiles.d`:
 
-{{< tabs groupId="config-with-json" >}}
-{{% tab name="toml" %}}
+{{< tabs groupid="config-with-json" >}}
+{{% tab title="toml" %}}
 
 ```toml
 # Includes
@@ -20,7 +20,7 @@ includes = ["conf.d/*.conf", "profiles.d/*.yaml", "profiles.d/*.toml"]
 
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
         
@@ -35,7 +35,7 @@ global:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 
@@ -47,7 +47,7 @@ global {
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -71,11 +71,11 @@ The HCL format is special in that it cannot be mixed with other formats.
 
 Included files cannot include nested files. Specifying `includes` inside an included file has no effect.
 
-Within included files, the current [configuration path]({{< ref "/configuration/#path-resolution-in-configuration" >}}) is not changed. Path resolution remains relative to the path of the main configuration file.
+Within included files, the current [configuration path]({{% ref "/configuration/#path-resolution-in-configuration" %}}) is not changed. Path resolution remains relative to the path of the main configuration file.
 
 ## Configuration Merging
 
-Loading a configuration file involves loading the physical file from disk and applying all [variables]({{< ref "/configuration/variables" >}}) and [templates]({{< ref "/configuration/templates" >}}) prior to parsing the file in a supported format `hcl`, `json`, `toml` and `yaml`. This means [variables]({{< ref "/configuration/variables" >}}) and [templates]({{< ref "/configuration/templates" >}}) must create valid configuration markup that can be parsed or loading will fail.
+Loading a configuration file involves loading the physical file from disk and applying all [variables]({{% ref "/configuration/variables" %}}) and [templates]({{% ref "/configuration/templates" %}}) prior to parsing the file in a supported format `hcl`, `json`, `toml` and `yaml`. This means [variables]({{% ref "/configuration/variables" %}}) and [templates]({{% ref "/configuration/templates" %}}) must create valid configuration markup that can be parsed or loading will fail.
 
 Configuration files are loaded and applied in a fixed order:
 
@@ -83,7 +83,7 @@ Configuration files are loaded and applied in a fixed order:
 2. `includes` are iterated in declaration order:
    * Every item may be a single file path or glob expression
    * Glob expressions are resolved and iterated in alphabetical order
-   * All paths are resolved relative to [configuration path]({{< ref "/configuration/#path-resolution-in-configuration" >}})
+   * All paths are resolved relative to [configuration path]({{% ref "/configuration/#path-resolution-in-configuration" %}})
 
 Configuration files are loaded in the following order when assuming `/etc/resticprofile/profiles.conf` with `includes = ["first.conf", "conf.d/*.conf", "last.conf"]`:
 ```
@@ -103,8 +103,8 @@ Configuration **merging** follows the logic:
 * Lists of values or lists of objects are considered properties not config structure and will be replaced
 
 
-{{< tabs groupId="include-merging-example" >}}
-{{% tab name="Final configuration" %}}
+{{< tabs groupid="include-merging-example" >}}
+{{% tab title="Final configuration" %}}
 
 ```yaml
 includes:
@@ -122,7 +122,7 @@ default:
 ```
 
 {{% /tab %}}
-{{% tab name="profiles.yaml" %}}
+{{% tab title="profiles.yaml" %}}
 
 ```yaml
 includes:
@@ -140,7 +140,7 @@ default:
 ```
 
 {{% /tab %}}
-{{% tab name="first.yaml" %}}
+{{% tab title="first.yaml" %}}
 
 ```yaml
         
@@ -158,7 +158,7 @@ default:
 ```
 
 {{% /tab %}}
-{{% tab name="second.yaml" %}}
+{{% tab title="second.yaml" %}}
 
 ```yaml
         
@@ -184,5 +184,6 @@ default:
 `resticprofile` prior to v0.18.0 had a slightly different behavior when merging configuration properties of a different type (e.g. number <-> text or list <-> single value). In such cases the existing value was not overridden by an included file, breaking the rule "what includes later overrides what defines earlier".
 
 {{% /notice %}}
+
 
 

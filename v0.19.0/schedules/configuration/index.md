@@ -1,13 +1,13 @@
 ---
-title: "Schedule Configuration"
+title: Schedule Configuration
 weight: 10
 ---
 
 
 The schedule configuration consists of a few parameters which can be added on each profile:
 
-{{< tabs groupId="config-with-json" >}}
-{{% tab name="toml" %}}
+{{< tabs groupid="config-with-json" >}}
+{{% tab title="toml" %}}
 
 ```toml
 [profile.backup]
@@ -20,7 +20,7 @@ The schedule configuration consists of a few parameters which can be added on ea
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 profile:
@@ -34,7 +34,7 @@ profile:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 "profile" "backup" {
@@ -48,7 +48,7 @@ profile:
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -173,8 +173,8 @@ The `schedule` can be a string or an array of string (to allow for multiple sche
 
 Here's an example of a scheduling configuration:
 
-{{< tabs groupId="config-with-json" >}}
-{{% tab name="toml" %}}
+{{< tabs groupid="config-with-json" >}}
+{{% tab title="toml" %}}
 
 ```toml
 [default]
@@ -201,7 +201,7 @@ Here's an example of a scheduling configuration:
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 default:
@@ -227,7 +227,7 @@ self:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 "default" = {
@@ -259,7 +259,7 @@ self:
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -293,4 +293,5 @@ self:
 
 {{% /tab %}}
 {{% /tabs %}}
+
 

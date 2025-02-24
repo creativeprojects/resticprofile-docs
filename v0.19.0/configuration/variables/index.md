@@ -52,8 +52,8 @@ For example, for the variable `.Now` you can use:
 
 You can use a combination of inheritance and variables in the resticprofile configuration file like so:
 
-{{< tabs groupId="config-with-json" >}}
-{{% tab name="toml" %}}
+{{< tabs groupid="config-with-json" >}}
+{{% tab title="toml" %}}
 
 ```toml
 [generic]
@@ -101,7 +101,7 @@ You can use a combination of inheritance and variables in the resticprofile conf
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 ---
@@ -157,7 +157,7 @@ src:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 "generic" = {
@@ -206,7 +206,7 @@ src:
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -340,8 +340,8 @@ tag: "{{ $name }}"
 
 Here's an example of a configuration on Linux where I use a variable `$mountpoint` set to a USB drive mount point:
 
-{{< tabs groupId="config-with-json" >}}
-{{% tab name="toml" %}}
+{{< tabs groupid="config-with-json" >}}
+{{% tab title="toml" %}}
 
 ```toml
 [global]
@@ -363,7 +363,7 @@ Here's an example of a configuration on Linux where I use a variable `$mountpoin
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 global:
@@ -387,7 +387,7 @@ default:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 
 ```hcl
@@ -414,7 +414,7 @@ default {
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {{ $mountpoint := "/mnt/external" }}
@@ -442,4 +442,5 @@ default {
 
 {{% /tab %}}
 {{% /tabs %}}
+
 
