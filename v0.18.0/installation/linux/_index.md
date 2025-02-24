@@ -1,6 +1,5 @@
 ---
-title: "Linux"
-date: 2022-04-23T23:24:34+01:00
+title: Linux
 weight: 10
 ---
 
@@ -61,3 +60,4 @@ Even though resticprofile is distributed as a **binary**, it looks like homebrew
 Depending on your distribution you will need to install gcc:
 * `$ sudo yum install gcc`
 * `$ sudo apt install gcc`
+

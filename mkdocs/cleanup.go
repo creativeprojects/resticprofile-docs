@@ -3,6 +3,8 @@ package main
 import (
 	"bytes"
 	"errors"
+	"fmt"
+	"io"
 	"io/fs"
 	"os"
 	"path/filepath"
@@ -12,18 +14,39 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func cleanupDocs(version string) error {
-	if version == "" {
+const (
+	tagTOML = "+++"
+	tagYAML = "---"
+	fileExt = ".md"
+)
+
+var (
+	removeHeaders = []string{"date", "tags"}
+)
+
+func cleanupDocs(root string) error {
+	if root == "" {
 		return errors.New("invalid version")
 	}
-	return filepath.WalkDir(version, func(path string, d fs.DirEntry, err error) error {
+	// single file?
+	finfo, err := os.Stat(root)
+	if err != nil {
+		return err
+	}
+	if !finfo.IsDir() {
+		if filepath.Ext(root) == fileExt {
+			return cleanupMD(root)
+		}
+		return fmt.Errorf("not a directory: %q", root)
+	}
+	return filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
 		if d.IsDir() {
 			return nil
 		}
-		if filepath.Ext(path) != ".md" {
+		if filepath.Ext(path) != fileExt {
 			return nil
 		}
 		clog.Debugf("cleaning up %q", path)
@@ -48,7 +71,7 @@ func cleanupMD(path string) error {
 		lineNum++
 		line = bytes.TrimSpace(line)
 		lineStr := string(line)
-		if lineStr == "+++" {
+		if lineStr == tagTOML {
 			clog.Tracef("TOML marker on line %d", lineNum)
 			headerTOML = !headerTOML
 			if !headerTOML {
@@ -56,7 +79,7 @@ func cleanupMD(path string) error {
 			}
 			continue
 		}
-		if lineStr == "---" {
+		if lineStr == tagYAML {
 			clog.Tracef("YAML marker on line %d", lineNum)
 			headerYAML = !headerYAML
 			if !headerYAML {
@@ -85,12 +108,56 @@ func cleanupMD(path string) error {
 	if err != nil {
 		return err
 	}
-	if _, found := header["date"]; found {
-		rewrite = true
-		delete(header, "date")
+	for _, removeHeader := range removeHeaders {
+		if _, found := header[removeHeader]; found {
+			rewrite = true
+			delete(header, removeHeader)
+		}
 	}
 	if rewrite {
 		clog.Debugf("rewrite needed: %+v\n", header)
+		return rewriteMD(path, header, lines[lineNum:])
 	}
 	return nil
+}
+
+func rewriteMD(filename string, header map[string]any, lines [][]byte) error {
+	finfo, err := os.Stat(filename)
+	if err != nil {
+		return err
+	}
+	file, err := os.OpenFile(filename, os.O_TRUNC|os.O_WRONLY, finfo.Mode())
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+	err = writeLine(file, []byte(tagYAML))
+	if err != nil {
+		return err
+	}
+	encoder := yaml.NewEncoder(file)
+	err = encoder.Encode(header)
+	if err != nil {
+		return err
+	}
+	err = writeLine(file, []byte(tagYAML))
+	if err != nil {
+		return err
+	}
+	for _, line := range lines {
+		err = writeLine(file, line)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func writeLine(w io.Writer, content []byte) error {
+	_, err := w.Write(content)
+	if err != nil {
+		return err
+	}
+	_, err = w.Write([]byte{'\n'})
+	return err
 }

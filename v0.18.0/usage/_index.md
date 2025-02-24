@@ -1,10 +1,9 @@
-+++
-chapter = true
-pre = "<b>3. </b>"
-title = "Usage"
-weight = 15
-tags = ["v0.17.0"]
-+++
+---
+chapter: true
+pre: <b>3. </b>
+title: Usage
+weight: 15
+---
 
 
 # Using resticprofile
@@ -124,3 +123,4 @@ light or dark terminal (none to disable colouring)
 * **[-w | --wait]**: Wait at the very end of the execution for the user to press enter. This is only useful in Windows when resticprofile is started from explorer and the console window closes automatically at the end.
 * **[resticprofile OR restic command]**: Like snapshots, backup, check, prune, forget, mount, etc.
 * **[additional flags]**: Any additional flags to pass to the restic command line
+

@@ -1,6 +1,5 @@
 ---
-title: "mac OS X"
-date: 2022-04-23T23:22:41+01:00
+title: mac OS X
 weight: 11
 ---
 
@@ -51,3 +50,4 @@ $ sudo ./install.sh -b /usr/local/bin
 ```
 
 It will install resticprofile in `/usr/local/bin/`
+

@@ -1,6 +1,5 @@
 ---
-title: "Inheritance"
-date: 2022-05-02T20:00:00+02:00
+title: Inheritance
 weight: 16
 ---
 
@@ -491,3 +490,4 @@ dry-run: /usr/local/bin/restic prune --insecure-tls --repo rest:https://backup-h
 {{% notice style="tip" %}}
 The option `--dry-run` prints restic commands to console or log file. To see what flags are effectively used with each *restic command* involved in *backup*, use `resticprofile --dry-run [<profile-name>.]backup`.
 {{% /notice %}}
+

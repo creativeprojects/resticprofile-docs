@@ -1,6 +1,5 @@
 ---
-title: "Command Hooks"
-date: 2022-05-16T19:46:52+01:00
+title: Command Hooks
 weight: 20
 ---
 
@@ -144,3 +143,4 @@ graph TD
     PRF('run-finally' from profile)
     FAIL --> BRF
 ```
+

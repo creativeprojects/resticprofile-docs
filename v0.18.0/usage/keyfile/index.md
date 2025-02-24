@@ -1,6 +1,5 @@
 ---
-title: "Generate a Keyfile"
-date: 2022-05-16T20:21:16+01:00
+title: Generate a Keyfile
 weight: 10
 ---
 
@@ -27,3 +26,4 @@ To generate a different size of key, you can specify the bytes length on the com
 ```shell
 $ resticprofile generate --random-key 2048
 ```
+

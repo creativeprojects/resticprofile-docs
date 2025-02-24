@@ -1,6 +1,5 @@
 ---
-title: "Prometheus"
-date: 2022-05-16T20:19:00+01:00
+title: Prometheus
 weight: 5
 ---
 
@@ -216,5 +215,6 @@ root:
 
 
 which will add the `host` label to all your metrics.
+
 
 

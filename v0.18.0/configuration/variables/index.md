@@ -1,6 +1,5 @@
 ---
-title: "Variables"
-date: 2022-05-16T20:04:35+01:00
+title: Variables
 weight: 25
 ---
 
@@ -413,3 +412,4 @@ default {
 
 {{% /tab %}}
 {{% /tabs %}}
+

@@ -1,6 +1,5 @@
 ---
-title: "Reference"
-date: 2022-05-16T20:07:43+01:00
+title: Reference
 weight: 50
 ---
 
@@ -288,4 +287,5 @@ Flags passed to the restic command line
 * **host**: true / false OR string
 * **path**: true / false, string OR list of strings
 * **tag**: true / false, string OR list of strings
+
 

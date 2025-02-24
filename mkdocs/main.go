@@ -24,7 +24,7 @@ func main() {
 	case "cleanup":
 		version := flag.Arg(1)
 		if version == "" || !strings.HasPrefix(version, "v") {
-			clog.Error("please specify which version to cleanup: mkdocs cleanup v0.18.0")
+			clog.Error("please specify which version (of file path) to cleanup: mkdocs cleanup v0.18.0")
 			os.Exit(1)
 		}
 		err = cleanupDocs(version)
