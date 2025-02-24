@@ -26,6 +26,7 @@ var (
 	simpleReplacements = [][]string{
 		{"tabs groupId=", "tabs groupid="},
 		{"tab name=", "tab title="},
+		{" vebose ", " verbose "},
 	}
 	regexpReplacements = [][]string{
 		{`{{<\s*ref\s+"([^"]*)"\s*>}}`, `{{% ref "$1" %}}`},
