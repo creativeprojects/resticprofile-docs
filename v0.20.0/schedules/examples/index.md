@@ -1,5 +1,5 @@
 ---
-title: "Schedule Examples"
+title: Schedule Examples
 weight: 30
 ---
 
@@ -111,8 +111,8 @@ $ resticprofile -c examples/windows.yaml -n self unschedule
 
 With this example of configuration for Linux:
 
-{{< tabs groupId="config-with-json" >}}
-{{% tab name="toml" %}}
+{{< tabs groupid="config-with-json" >}}
+{{% tab title="toml" %}}
 
 ```toml
 [default]
@@ -135,7 +135,7 @@ With this example of configuration for Linux:
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 default:
@@ -157,7 +157,7 @@ test1:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 "default" = {
@@ -184,7 +184,7 @@ test1:
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -349,3 +349,4 @@ If you prefer not being asked, you can add the `--no-start` flag like so:
 ```shell
 % resticprofile -v -c examples/private/azure.yaml -n self schedule --no-start
 ```
+

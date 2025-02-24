@@ -29,8 +29,8 @@ $ restic --repo "local:/backup" --password-file "password.txt" --verbose backup 
 
 For resticprofile to generate this command automatically for you, here's the configuration file:
 
-{{< tabs groupId="config-with-json" >}}
-{{% tab name="toml" %}}
+{{< tabs groupid="config-with-json" >}}
+{{% tab title="toml" %}}
 
 ```toml
 # indentation is not needed but it makes it easier to read ;)
@@ -45,7 +45,7 @@ For resticprofile to generate this command automatically for you, here's the con
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 ---
@@ -60,7 +60,7 @@ default:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 
@@ -76,7 +76,7 @@ default {
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -125,4 +125,5 @@ Using the basic configuration from earlier, and taking into account that the con
 ## More information
 
 {{% children  %}}
+
 

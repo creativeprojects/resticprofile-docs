@@ -10,8 +10,8 @@ weight: 17
 The copy command needs two repositories (and quite likely 2 different set of keys). You can configure a `copy` section like this:
 
 
-{{< tabs groupId="config-with-hcl" >}}
-{{% tab name="toml" %}}
+{{< tabs groupid="config-with-hcl" >}}
+{{% tab title="toml" %}}
 
 ```toml
 [default]
@@ -26,7 +26,7 @@ The copy command needs two repositories (and quite likely 2 different set of key
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 default:
@@ -40,7 +40,7 @@ default:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 
 ```hcl
@@ -68,8 +68,8 @@ You will note that the secondary repository doesn't need to have a `2` behind it
 If you want to initialize the *copy* repository using the `copy-chunker-params` flag, it needs to be called `initialize-copy-chunker-params` instead. As such, this flag does not exist on the `copy` target which is why we need to prefix it.
 
 
-{{< tabs groupId="config-with-hcl" >}}
-{{% tab name="toml" %}}
+{{< tabs groupid="config-with-hcl" >}}
+{{% tab title="toml" %}}
 
 ```toml
 [profile]
@@ -85,7 +85,7 @@ If you want to initialize the *copy* repository using the `copy-chunker-params` 
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 profile:
@@ -100,7 +100,7 @@ profile:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 
 ```hcl
@@ -121,4 +121,5 @@ profile {
 
 {{% /tab %}}
 {{% /tabs %}}
+
 

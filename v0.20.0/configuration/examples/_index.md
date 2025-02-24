@@ -7,8 +7,8 @@ weight: 5
 
 Here's a simple configuration file using a Microsoft Azure backend:
 
-{{< tabs groupId="config-with-hcl" >}}
-{{% tab name="toml" %}}
+{{< tabs groupid="config-with-hcl" >}}
+{{% tab title="toml" %}}
 
 ```toml
 [default]
@@ -28,7 +28,7 @@ Here's a simple configuration file using a Microsoft Azure backend:
     source = [ "/", "/var" ]
 ```
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 default:
@@ -52,7 +52,7 @@ default:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 
@@ -83,8 +83,8 @@ default {
 
 Here's a more complex configuration file showing profile inheritance and two backup profiles using the same repository:
 
-{{< tabs groupId="config-with-hcl" >}}
-{{% tab name="toml" %}}
+{{< tabs groupid="config-with-hcl" >}}
+{{% tab title="toml" %}}
 
 ```toml
 [global]
@@ -215,7 +215,7 @@ Here's a more complex configuration file showing profile inheritance and two bac
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 global:
@@ -317,7 +317,7 @@ src:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 global {
@@ -398,8 +398,8 @@ self {
 ## Configuration example for Windows
 
 
-{{< tabs groupId="config-with-hcl" >}}
-{{% tab name="toml" %}}
+{{< tabs groupid="config-with-hcl" >}}
+{{% tab title="toml" %}}
 
 ```toml
 [global]
@@ -429,7 +429,7 @@ self {
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 global:
@@ -456,7 +456,7 @@ test:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 
@@ -493,8 +493,8 @@ test {
 
 Simple example sending a file via stdin
 
-{{< tabs groupId="config-with-hcl" >}}
-{{% tab name="toml" %}}
+{{< tabs groupid="config-with-hcl" >}}
+{{% tab title="toml" %}}
 
 ```toml
 
@@ -518,7 +518,7 @@ Simple example sending a file via stdin
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
         
@@ -542,7 +542,7 @@ mysql:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 # sending stream through stdin
@@ -570,5 +570,6 @@ mysql {
 
 {{% /tab %}}
 {{% /tabs %}}
+
 
 
