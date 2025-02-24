@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"errors"
 	"io"
 	"io/fs"
 	"os"
@@ -16,34 +15,13 @@ import (
 
 func createSnapshots() error {
 	source := "./source"
-	_ = os.MkdirAll(source, 0o700)
-	repo, err := git.PlainOpen(source)
+	repo, err := openRepo(source)
 	if err != nil {
-		clog.Info("source empty, cloning repository...")
-		repo, err = git.PlainClone(source, false, &git.CloneOptions{URL: "https://github.com/creativeprojects/resticprofile.git"})
-		if err != nil {
-			clog.Errorf("cannot clone git repository: %s", err)
-			os.Exit(1)
-		}
+		return err
 	}
-
 	worktree, err := repo.Worktree()
 	if err != nil {
 		clog.Errorf("cannot load worktree: %s", err)
-		os.Exit(1)
-	}
-	status, err := worktree.Status()
-	if err != nil {
-		clog.Errorf("cannot get status: %s", err)
-		os.Exit(1)
-	}
-	if !status.IsClean() {
-		clog.Error("repository is not clean, cannot generate documentation")
-		os.Exit(1)
-	}
-	err = worktree.Pull(&git.PullOptions{RemoteName: "origin"})
-	if err != nil && !errors.Is(err, git.NoErrAlreadyUpToDate) {
-		clog.Errorf("cannot pull from remote: %s", err)
 		os.Exit(1)
 	}
 	head, err := repo.Head()
@@ -77,7 +55,10 @@ func createSnapshots() error {
 					clog.Warningf("cannot copy files: %s", err)
 				}
 			}
-			cleanupDocs(to)
+			err = cleanupDocs(to)
+			if err != nil {
+				clog.Warning(err)
+			}
 		}
 
 		err = worktree.Reset(&git.ResetOptions{Mode: git.HardReset, Commit: head.Hash()})

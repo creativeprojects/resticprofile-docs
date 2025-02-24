@@ -21,6 +21,9 @@ func main() {
 
 	var err error
 	switch flag.Arg(0) {
+	case "snapshot":
+		err = createSnapshots()
+
 	case "cleanup":
 		version := flag.Arg(1)
 		if version == "" || !strings.HasPrefix(version, "v") {
@@ -28,8 +31,17 @@ func main() {
 			os.Exit(1)
 		}
 		err = cleanupDocs(version)
+
+	case "generate":
+		version := flag.Arg(1)
+		if version == "" || !strings.HasPrefix(version, "v") {
+			clog.Error("please specify which version to generate: mkdocs generate v0.18.0")
+			os.Exit(1)
+		}
+		err = generateDocs(version)
+
 	default:
-		err = createSnapshots()
+		clog.Info("please specify any of the commands: [snapshot, cleanup or generate]")
 	}
 	if err != nil {
 		clog.Error(err)
