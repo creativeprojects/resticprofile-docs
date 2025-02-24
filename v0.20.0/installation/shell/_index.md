@@ -1,6 +1,5 @@
 ---
-title: "Shell Completion"
-date: 2022-04-23T23:55:10+01:00
+title: Shell Completion
 weight: 100
 ---
 
@@ -23,3 +22,4 @@ To install them permanently:
 $ resticprofile generate --bash-completion > /etc/bash_completion.d/resticprofile
 $ chmod +x /etc/bash_completion.d/resticprofile
 ```
+

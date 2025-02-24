@@ -1,6 +1,5 @@
 ---
-title: "Locks"
-date: 2022-05-16T20:26:09+01:00
+title: Locks
 weight: 20
 ---
 
@@ -247,3 +246,4 @@ global:
 
 
 If restic lock management is not desired, it can be disabled by setting both values to **0**.
+

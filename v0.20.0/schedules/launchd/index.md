@@ -1,6 +1,5 @@
 ---
-title: "Launchd"
-date: 2022-05-16T20:13:32+01:00
+title: Launchd
 weight: 110
 ---
 
@@ -40,3 +39,4 @@ Please note if you schedule a user agent while running resticprofile with sudo: 
 A launchd daemon is generated when you set `schedule-permission` to `system`. 
 
 It consists of a `plist` file in the folder `/Library/LaunchDaemons`. You have to run resticprofile with sudo to `schedule`, check the  `status` and `unschedule` the profile.
+

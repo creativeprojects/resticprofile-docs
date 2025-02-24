@@ -1,6 +1,5 @@
 ---
-title: "Configuration v2 proposal"
-tags: ["v1.0.0"]
+title: Configuration v2 proposal
 weight: 60
 ---
 

@@ -1,9 +1,9 @@
-+++
-chapter = true
-pre = "<b>5. </b>"
-title = "Status"
-weight = 30
-+++
+---
+chapter: true
+pre: <b>5. </b>
+title: Status
+weight: 30
+---
 
 
 # Status file for easy monitoring
@@ -169,3 +169,4 @@ profile:
 
 {{% /tab %}}
 {{% /tabs %}}
+

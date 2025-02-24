@@ -1,7 +1,5 @@
 ---
-title: "Docker"
-tags: ["v0.18.0"]
-date: 2022-04-23T23:58:56+01:00
+title: Docker
 weight: 30
 ---
 
@@ -54,3 +52,4 @@ See [contrib][2]
 
 [1]: https://rclone.org/
 [2]: https://github.com/creativeprojects/resticprofile/tree/master/contrib/schedule-in-docker
+

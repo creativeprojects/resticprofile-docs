@@ -1,9 +1,9 @@
-+++
-chapter = true
-pre = "<b>4. </b>"
-title = "Schedules"
-weight = 20
-+++
+---
+chapter: true
+pre: <b>4. </b>
+title: Schedules
+weight: 20
+---
 
 
 # Scheduled backups
@@ -73,4 +73,5 @@ which mean you can schedule `backup`, `forget`, `prune`, `check` and `copy` inde
 ## retention schedule is deprecated
 **Important**:
 starting from version 0.11.0 the schedule of the `retention` section is **deprecated**: Use the `forget` section instead.
+
 

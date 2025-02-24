@@ -1,6 +1,5 @@
 ---
-title: "Preventing system sleep"
-tags: ["v0.19.0"]
+title: Preventing system sleep
 weight: 40
 ---
 
@@ -14,3 +13,4 @@ There's a `global` parameter called `prevent-sleep` that you can set to `true`, 
 Please note:
 - it will not prevent a sleep if the system is running on batteries
 - it will not prevent a sleep triggered by a user action: using the sleep button, closing the laptop lid, etc.
+

@@ -1,6 +1,5 @@
 ---
-title: "Windows"
-date: 2022-04-23T23:24:38+01:00
+title: Windows
 weight: 12
 ---
 
@@ -20,3 +19,4 @@ It will create a `bin` directory under your current directory and place `resticp
 
 - Download the package corresponding to your system and CPU from the [release page](https://github.com/creativeprojects/resticprofile/releases)
 - Once downloaded you need to open the archive and copy the binary file `resticprofile` (or `resticprofile.exe`) in your PATH.
+

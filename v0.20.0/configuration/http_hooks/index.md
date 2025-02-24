@@ -1,7 +1,5 @@
 ---
-title: "HTTP Hooks"
-date: 2022-05-16T19:46:52+01:00
-tags: ["v0.18.0"]
+title: HTTP Hooks
 weight: 22
 ---
 
@@ -510,3 +508,4 @@ global {
 
 {{% /tab %}}
 {{% /tabs %}}
+

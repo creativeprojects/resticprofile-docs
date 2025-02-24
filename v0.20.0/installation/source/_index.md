@@ -1,6 +1,5 @@
 ---
-title: "Source"
-date: 2022-04-23T23:50:43+01:00
+title: Source
 weight: 16
 ---
 
@@ -25,3 +24,4 @@ To install the binary in your user path:
 ```shell
 $ make install
 ```
+
