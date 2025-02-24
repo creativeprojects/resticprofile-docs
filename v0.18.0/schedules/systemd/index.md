@@ -49,7 +49,7 @@ Since version 0.16.0, you now can describe your own templates if you need to add
 The format used is a [go template](https://pkg.go.dev/text/template) and you need to specify your own unit and/or timer file in the global section of the configuration (it will apply to all your profiles):
 
 {{< tabs groupid="config-with-json" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 [global]
@@ -58,7 +58,7 @@ The format used is a [go template](https://pkg.go.dev/text/template) and you nee
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 ---
@@ -68,7 +68,7 @@ global:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 "global" = {
@@ -78,7 +78,7 @@ global:
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -139,5 +139,6 @@ These are available for both the unit and timer templates:
 * SystemdProfile   *string*
 * Nice             *integer*
 * Environment      *array of strings*
+
 
 

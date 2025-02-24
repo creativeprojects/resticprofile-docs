@@ -11,7 +11,7 @@ The copy command needs two repositories (and quite likely 2 different set of key
 
 
 {{< tabs groupid="config-with-hcl" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 [default]
@@ -26,7 +26,7 @@ The copy command needs two repositories (and quite likely 2 different set of key
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 default:
@@ -40,7 +40,7 @@ default:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 
 ```hcl
@@ -69,7 +69,7 @@ If you want to initialize the *copy* repository using the `copy-chunker-params` 
 
 
 {{< tabs groupid="config-with-hcl" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 [profile]
@@ -85,7 +85,7 @@ If you want to initialize the *copy* repository using the `copy-chunker-params` 
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 profile:
@@ -100,7 +100,7 @@ profile:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 
 ```hcl
@@ -121,5 +121,6 @@ profile {
 
 {{% /tab %}}
 {{% /tabs %}}
+
 
 

@@ -24,6 +24,10 @@ var (
 	removeHeaders      = []string{"date", "tags"}
 	simpleReplacements = [][]string{
 		{"tabs groupId=", "tabs groupid="},
+		{"tab name=", "tab title="},
+	}
+	regexpReplacements = [][]string{
+		{`{{<\s*ref\s+"([^"]*)"\s*>}}`, `{{% ref "$1" %}}`},
 	}
 )
 

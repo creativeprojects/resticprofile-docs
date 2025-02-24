@@ -9,7 +9,7 @@ resticprofile can generate a prometheus file, or send the report to a push gatew
 Here's a configuration example with both options to generate a file and send to a push gateway:
 
 {{< tabs groupid="config-with-json" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 [root]
@@ -24,7 +24,7 @@ Here's a configuration example with both options to generate a file and send to 
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 root:
@@ -39,7 +39,7 @@ root:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 "root" = {
@@ -56,7 +56,7 @@ root:
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -130,7 +130,7 @@ You can add your own prometheus labels. Please note they will be applied to **al
 Here's an example:
 
 {{< tabs groupid="config-with-json" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 [root]
@@ -148,7 +148,7 @@ Here's an example:
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 root:
@@ -165,7 +165,7 @@ root:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 "root" = {
@@ -186,7 +186,7 @@ root:
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -215,6 +215,7 @@ root:
 
 
 which will add the `host` label to all your metrics.
+
 
 
 

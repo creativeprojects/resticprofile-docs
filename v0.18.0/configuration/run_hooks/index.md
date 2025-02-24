@@ -14,7 +14,7 @@ resticprofile has 2 places where you can run commands around restic:
 Here's an example of all the external commands that you can run during the execution of a profile:
 
 {{< tabs groupid="config-with-json" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 [documents]
@@ -33,7 +33,7 @@ Here's an example of all the external commands that you can run during the execu
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 documents:
@@ -51,7 +51,7 @@ documents:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 documents {
@@ -71,7 +71,7 @@ documents {
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -143,5 +143,6 @@ graph TD
     PRF('run-finally' from profile)
     FAIL --> BRF
 ```
+
 
 

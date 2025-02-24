@@ -41,7 +41,7 @@ The configuration is the same for each of these 4 types of hooks:
 ### Example sending monitoring information to healthchecks.io:
 
 {{< tabs groupid="config-with-json" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 [profile]
@@ -100,7 +100,7 @@ inherit = "default"
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 profile:
@@ -153,7 +153,7 @@ profile:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 "profile" {
@@ -217,7 +217,7 @@ profile:
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -351,7 +351,7 @@ And here's an example of a configuration using a body template:
 
 
 {{< tabs groupid="config-with-json" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 [profile]
@@ -371,7 +371,7 @@ And here's an example of a configuration using a body template:
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 profile:
@@ -391,7 +391,7 @@ profile:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 "profile" {
@@ -413,7 +413,7 @@ profile:
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -460,7 +460,7 @@ The format is like:
 
 
 {{< tabs groupid="config-with-json" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 [global]
@@ -470,7 +470,7 @@ The format is like:
 
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
         
@@ -482,7 +482,7 @@ global:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 
@@ -493,7 +493,7 @@ global {
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -508,5 +508,6 @@ global {
 
 {{% /tab %}}
 {{% /tabs %}}
+
 
 

@@ -12,7 +12,7 @@ Since resticprofile can run several commands in a profile, it could be better to
 For this to happen you can specify a lock file in each profile:
 
 {{< tabs groupid="config-with-json" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 [src]
@@ -32,7 +32,7 @@ For this to happen you can specify a lock file in each profile:
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 src:
@@ -52,7 +52,7 @@ src:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 "src" = {
@@ -75,7 +75,7 @@ src:
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -118,7 +118,7 @@ For that matter, if you add the flag `force-inactive-lock` to your profile, rest
 * **restic locks**: Evaluate if a restic command failed on acquiring a lock. If the lock is older than `restic-stale-lock-age`, invoke `restic unlock` and retry the command that failed (can be disabled by setting `restic-stale-lock-age` to 0, default is 2h).
 
 {{< tabs groupid="config-with-json" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 [global]
@@ -130,7 +130,7 @@ For that matter, if you add the flag `force-inactive-lock` to your profile, rest
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 global:
@@ -142,7 +142,7 @@ src:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 "global" = {
@@ -156,7 +156,7 @@ src:
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -190,7 +190,7 @@ Note: The lock wait duration is cumulative. If various locks in one profile-run 
 resticprofile can retry restic commands that fail on acquiring a lock and can also ask restic to unlock stale locks. The behaviour is controlled by 2 settings inside the `global` section:
 
 {{< tabs groupid="config-with-json" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 [global]
@@ -203,7 +203,7 @@ resticprofile can retry restic commands that fail on acquiring a lock and can al
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 global:
@@ -216,7 +216,7 @@ global:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 "global" = {
@@ -230,7 +230,7 @@ global:
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -246,5 +246,6 @@ global:
 
 
 If restic lock management is not desired, it can be disabled by setting both values to **0**.
+
 
 

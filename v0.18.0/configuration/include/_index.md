@@ -7,7 +7,7 @@ The configuration may be split into multiple files by adding `includes = "glob-p
 E.g. the following `profiles.conf` loads configurations from `conf.d` and `profiles.d`:
 
 {{< tabs groupid="config-with-json" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 # Includes
@@ -20,7 +20,7 @@ includes = ["conf.d/*.conf", "profiles.d/*.yaml", "profiles.d/*.toml"]
 
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
         
@@ -35,7 +35,7 @@ global:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 
@@ -47,7 +47,7 @@ global {
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -104,7 +104,7 @@ Configuration **merging** follows the logic:
 
 
 {{< tabs groupid="include-merging-example" >}}
-{{% tab name="Final configuration" %}}
+{{% tab title="Final configuration" %}}
 
 ```yaml
 includes:
@@ -122,7 +122,7 @@ default:
 ```
 
 {{% /tab %}}
-{{% tab name="profiles.yaml" %}}
+{{% tab title="profiles.yaml" %}}
 
 ```yaml
 includes:
@@ -140,7 +140,7 @@ default:
 ```
 
 {{% /tab %}}
-{{% tab name="first.yaml" %}}
+{{% tab title="first.yaml" %}}
 
 ```yaml
         
@@ -158,7 +158,7 @@ default:
 ```
 
 {{% /tab %}}
-{{% tab name="second.yaml" %}}
+{{% tab title="second.yaml" %}}
 
 ```yaml
         
@@ -184,6 +184,7 @@ default:
 `resticprofile` prior to v0.18.0 had a slightly different behavior when merging configuration properties of a different type (e.g. number <-> text or list <-> single value). In such cases the existing value was not overridden by an included file, breaking the rule "what includes later overrides what defines earlier".
 
 {{% /notice %}}
+
 
 
 

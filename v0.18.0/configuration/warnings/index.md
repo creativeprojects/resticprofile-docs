@@ -13,7 +13,7 @@ A restic warning occurs when it cannot read some files, but a snapshot was succe
 ### Let me introduce no-error-on-warning
 
 {{< tabs groupid="config-with-json" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 [profile]
@@ -25,7 +25,7 @@ A restic warning occurs when it cannot read some files, but a snapshot was succe
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 
 ```yaml
@@ -36,7 +36,7 @@ profile:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 "profile" = {
@@ -49,7 +49,7 @@ profile:
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -64,4 +64,5 @@ profile:
 
 {{% /tab %}}
 {{% /tabs %}}
+
 

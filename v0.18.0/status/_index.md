@@ -15,7 +15,7 @@ But sometimes we just need something simple that a monitoring system can regular
 In your profile, you simply need to add a new parameter, which is the location of your status file
 
 {{< tabs groupid="config-with-json" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 [profile]
@@ -23,7 +23,7 @@ In your profile, you simply need to add a new parameter, which is the location o
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 profile:
@@ -31,7 +31,7 @@ profile:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 "profile" {
@@ -40,7 +40,7 @@ profile:
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -104,7 +104,7 @@ This is a technical limitation to ensure restic displays terminal output correct
 `extended-status` is **not set by default because it hides any output from restic**
 
 {{< tabs groupid="config-with-json" >}}
-{{% tab name="toml" %}}
+{{% tab title="toml" %}}
 
 ```toml
 [profile]
@@ -118,7 +118,7 @@ This is a technical limitation to ensure restic displays terminal output correct
 ```
 
 {{% /tab %}}
-{{% tab name="yaml" %}}
+{{% tab title="yaml" %}}
 
 ```yaml
 profile:
@@ -133,7 +133,7 @@ profile:
 ```
 
 {{% /tab %}}
-{{% tab name="hcl" %}}
+{{% tab title="hcl" %}}
 
 ```hcl
 "profile" = {
@@ -149,7 +149,7 @@ profile:
 ```
 
 {{% /tab %}}
-{{% tab name="json" %}}
+{{% tab title="json" %}}
 
 ```json
 {
@@ -169,5 +169,6 @@ profile:
 
 {{% /tab %}}
 {{% /tabs %}}
+
 
 
