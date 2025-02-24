@@ -29,7 +29,7 @@ Note the **dot** after the name: it's used to pass the variables to the template
 
 Here's a working example:
 
-{{< tabs groupId="config-with-json" >}}
+{{< tabs groupid="config-with-json" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -565,4 +565,5 @@ There are a lot more you can do with configuration templates. If you're brave en
 
 For a more end-user kind of documentation, you can also read [hugo documentation on templates](https://gohugo.io/templates/introduction/) which is using the same Go implementation, but don't talk much about the developer side of it.
 Please note there are some functions only made available by hugo though.
+
 

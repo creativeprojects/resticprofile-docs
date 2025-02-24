@@ -21,7 +21,10 @@ const (
 )
 
 var (
-	removeHeaders = []string{"date", "tags"}
+	removeHeaders      = []string{"date", "tags"}
+	simpleReplacements = [][]string{
+		{"tabs groupId=", "tabs groupid="},
+	}
 )
 
 func cleanupDocs(root string) error {
@@ -95,10 +98,10 @@ func cleanupMD(path string) error {
 			bufferYAML.WriteByte('\n')
 		}
 	}
-	rewrite := false
+	headerChanged := false
 	header := make(map[string]any)
 	if bufferTOML.Len() > 0 {
-		rewrite = true
+		headerChanged = true
 		decoder := toml.NewDecoder(bufferTOML)
 		err = decoder.Decode(&header)
 	} else if bufferYAML.Len() > 0 {
@@ -110,13 +113,15 @@ func cleanupMD(path string) error {
 	}
 	for _, removeHeader := range removeHeaders {
 		if _, found := header[removeHeader]; found {
-			rewrite = true
+			headerChanged = true
 			delete(header, removeHeader)
 		}
 	}
-	if rewrite {
+
+	remainingLines, contentChanged := cleanContent(lines[lineNum:])
+	if headerChanged || contentChanged {
 		clog.Debugf("rewrite needed: %+v\n", header)
-		return rewriteMD(path, header, lines[lineNum:])
+		return rewriteMD(path, header, remainingLines)
 	}
 	return nil
 }
@@ -160,4 +165,19 @@ func writeLine(w io.Writer, content []byte) error {
 	}
 	_, err = w.Write([]byte{'\n'})
 	return err
+}
+
+func cleanContent(lines [][]byte) ([][]byte, bool) {
+	changed := false
+	output := make([][]byte, len(lines))
+	for i, line := range lines {
+		for _, replacement := range simpleReplacements {
+			if bytes.Contains(line, []byte(replacement[0])) {
+				changed = true
+				line = bytes.Replace(line, []byte(replacement[0]), []byte(replacement[1]), 1)
+			}
+		}
+		output[i] = line
+	}
+	return output, changed
 }

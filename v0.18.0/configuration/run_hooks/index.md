@@ -13,7 +13,7 @@ resticprofile has 2 places where you can run commands around restic:
 
 Here's an example of all the external commands that you can run during the execution of a profile:
 
-{{< tabs groupId="config-with-json" >}}
+{{< tabs groupid="config-with-json" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -143,4 +143,5 @@ graph TD
     PRF('run-finally' from profile)
     FAIL --> BRF
 ```
+
 

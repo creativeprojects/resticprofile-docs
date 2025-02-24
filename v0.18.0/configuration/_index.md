@@ -29,7 +29,7 @@ $ restic --repo "local:/backup" --password-file "password.txt" --verbose backup 
 
 For resticprofile to generate this command automatically for you, here's the configuration file:
 
-{{< tabs groupId="config-with-json" >}}
+{{< tabs groupid="config-with-json" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -125,4 +125,5 @@ Using the basic configuration from earlier, and taking into account that the con
 ## More information
 
 {{% children  %}}
+
 

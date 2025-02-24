@@ -64,7 +64,7 @@ tag: "{{ $name }}"
 
 You can use a combination of inheritance and variables in the resticprofile configuration file like so:
 
-{{< tabs groupId="config-with-json" >}}
+{{< tabs groupid="config-with-json" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -310,7 +310,7 @@ As you can see, the `src` profile inherited from the `generic` profile. The tags
 
 Here's another example of a configuration on Linux where I use a variable `$mountpoint` set to a USB drive mount point:
 
-{{< tabs groupId="config-with-json" >}}
+{{< tabs groupid="config-with-json" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -412,4 +412,5 @@ default {
 
 {{% /tab %}}
 {{% /tabs %}}
+
 

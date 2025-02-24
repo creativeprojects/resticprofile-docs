@@ -8,7 +8,7 @@ weight: 5
 resticprofile can generate a prometheus file, or send the report to a push gateway. For now, only a `backup` command will generate a report.
 Here's a configuration example with both options to generate a file and send to a push gateway:
 
-{{< tabs groupId="config-with-json" >}}
+{{< tabs groupid="config-with-json" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -129,7 +129,7 @@ resticprofile_build_info{goversion="go1.16.6",version="0.16.0"} 1
 You can add your own prometheus labels. Please note they will be applied to **all** the metrics.
 Here's an example:
 
-{{< tabs groupId="config-with-json" >}}
+{{< tabs groupid="config-with-json" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -215,6 +215,7 @@ root:
 
 
 which will add the `host` label to all your metrics.
+
 
 
 

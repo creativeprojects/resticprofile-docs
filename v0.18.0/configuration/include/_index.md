@@ -6,7 +6,7 @@ weight: 15
 The configuration may be split into multiple files by adding `includes = "glob-pattern"` to the main configuration file. 
 E.g. the following `profiles.conf` loads configurations from `conf.d` and `profiles.d`:
 
-{{< tabs groupId="config-with-json" >}}
+{{< tabs groupid="config-with-json" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -103,7 +103,7 @@ Configuration **merging** follows the logic:
 * Lists of values or lists of objects are considered properties not config structure and will be replaced
 
 
-{{< tabs groupId="include-merging-example" >}}
+{{< tabs groupid="include-merging-example" >}}
 {{% tab name="Final configuration" %}}
 
 ```yaml
@@ -184,5 +184,6 @@ default:
 `resticprofile` prior to v0.18.0 had a slightly different behavior when merging configuration properties of a different type (e.g. number <-> text or list <-> single value). In such cases the existing value was not overridden by an included file, breaking the rule "what includes later overrides what defines earlier".
 
 {{% /notice %}}
+
 
 

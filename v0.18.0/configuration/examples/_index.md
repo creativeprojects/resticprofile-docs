@@ -7,7 +7,7 @@ weight: 5
 
 Here's a simple configuration file using a Microsoft Azure backend:
 
-{{< tabs groupId="config-with-hcl" >}}
+{{< tabs groupid="config-with-hcl" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -83,7 +83,7 @@ default {
 
 Here's a more complex configuration file showing profile inheritance and two backup profiles using the same repository:
 
-{{< tabs groupId="config-with-hcl" >}}
+{{< tabs groupid="config-with-hcl" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -398,7 +398,7 @@ self {
 ## Configuration example for Windows
 
 
-{{< tabs groupId="config-with-hcl" >}}
+{{< tabs groupid="config-with-hcl" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -493,7 +493,7 @@ test {
 
 Simple example sending a file via stdin
 
-{{< tabs groupId="config-with-hcl" >}}
+{{< tabs groupid="config-with-hcl" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -570,5 +570,6 @@ mysql {
 
 {{% /tab %}}
 {{% /tabs %}}
+
 
 

@@ -40,7 +40,7 @@ The configuration is the same for each of these 4 types of hooks:
 
 ### Example sending monitoring information to healthchecks.io:
 
-{{< tabs groupId="config-with-json" >}}
+{{< tabs groupid="config-with-json" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -350,7 +350,7 @@ The field `exitCode` will be blank if no error occured.
 And here's an example of a configuration using a body template:
 
 
-{{< tabs groupId="config-with-json" >}}
+{{< tabs groupid="config-with-json" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -459,7 +459,7 @@ The format is like:
 ### global configuration example
 
 
-{{< tabs groupId="config-with-json" >}}
+{{< tabs groupid="config-with-json" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -508,4 +508,5 @@ global {
 
 {{% /tab %}}
 {{% /tabs %}}
+
 

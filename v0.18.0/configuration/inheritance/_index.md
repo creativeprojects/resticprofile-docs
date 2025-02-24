@@ -20,7 +20,7 @@ Profile configuration merging follows the same logic as [configuration merging](
 * There is no default inheritance. If `inherit` is not set, no inheritance applies
 
 
-{{< tabs groupId="profile-inheritance-example" >}}
+{{< tabs groupid="profile-inheritance-example" >}}
 {{% tab name="Profile \"base\" (yaml)" %}}
 
 ```yaml
@@ -130,7 +130,7 @@ Assuming the parent profile declares the list property `<list-property>`:
 * `<list-property>...` or `<list-property>__APPEND` appends to the list property
 * `...<list-property>` or `<list-property>__PREPEND` prepends to the list property
 
-{{< tabs groupId="config-with-inheritance-list-append" >}}
+{{< tabs groupid="config-with-inheritance-list-append" >}}
 {{% tab name="yaml" %}}
 
 ```yaml
@@ -188,7 +188,7 @@ Configuration values inside a mixin may be parametrized with variables following
 
 Unlike configuration [variables]({{< ref "/configuration/variables" >}}) and [templates]({{< ref "/configuration/templates" >}}), mixins create parsed configuration structure not config markup requires parsing. This allows mixins to be defined in one supported config format (`yaml`, `toml`, `json`) while being used in any other supported format when the configuration is split into multiple [includes]({{< ref "/configuration/include/#configuration-merging" >}}).
 
-{{< tabs groupId="config-with-mixins" >}}
+{{< tabs groupid="config-with-mixins" >}}
 {{% tab name="yaml" %}}
 
 ```yaml
@@ -298,7 +298,7 @@ List properties that have been inherited from a parent can be modified (append/p
 
 #### Mixin Example
 
-{{< tabs groupId="config-with-mixins-examples" >}}
+{{< tabs groupid="config-with-mixins-examples" >}}
 {{% tab name="yaml" %}}
 
 ```yaml
@@ -420,7 +420,7 @@ Profiles in resticprofile configure commandline options (flags) for restic comma
 
 For example, an arbitrary flag like `insecure-tls` that is not part of the profile config [reference]({{< ref "/configuration/reference" >}}) but valid for every restic command can be set at profile level and will be converted to a restic flag.
 
-{{< tabs groupId="config-with-common-flags-in-profile" >}}
+{{< tabs groupid="config-with-common-flags-in-profile" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -490,4 +490,5 @@ dry-run: /usr/local/bin/restic prune --insecure-tls --repo rest:https://backup-h
 {{% notice style="tip" %}}
 The option `--dry-run` prints restic commands to console or log file. To see what flags are effectively used with each *restic command* involved in *backup*, use `resticprofile --dry-run [<profile-name>.]backup`.
 {{% /notice %}}
+
 

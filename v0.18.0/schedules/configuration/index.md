@@ -1,12 +1,12 @@
 ---
-title: "Schedule Configuration"
+title: Schedule Configuration
 weight: 10
 ---
 
 
 The schedule configuration consists of a few parameters which can be added on each profile:
 
-{{< tabs groupId="config-with-json" >}}
+{{< tabs groupid="config-with-json" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -173,7 +173,7 @@ The `schedule` can be a string or an array of string (to allow for multiple sche
 
 Here's an example of a scheduling configuration:
 
-{{< tabs groupId="config-with-json" >}}
+{{< tabs groupid="config-with-json" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -293,4 +293,5 @@ self:
 
 {{% /tab %}}
 {{% /tabs %}}
+
 

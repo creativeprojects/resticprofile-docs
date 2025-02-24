@@ -16,7 +16,7 @@ resticprofile is capable of managing scheduled backups for you using:
 
 On unixes (except macOS) resticprofile is using **systemd** by default. **crond** can be used instead if configured in `global` `scheduler` parameter:
 
-{{< tabs groupId="config-with-json" >}}
+{{< tabs groupid="config-with-json" >}}
 {{% tab name="toml" %}}
 
 ```toml
@@ -73,5 +73,6 @@ which mean you can schedule `backup`, `forget`, `prune`, `check` and `copy` inde
 ## retention schedule is deprecated
 **Important**:
 starting from version 0.11.0 the schedule of the `retention` section is **deprecated**: Use the `forget` section instead.
+
 
 
