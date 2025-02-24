@@ -6,7 +6,7 @@ weight: 22
 
 ## Send HTTP messages before and after a job
 
-As well as being able to run [shell commands]({{< ref "run_hooks" >}}), you can now send HTTP messages before, after (success or failure) running a restic command.
+As well as being able to run [shell commands]({{% ref "run_hooks" %}}), you can now send HTTP messages before, after (success or failure) running a restic command.
 
 The sections that allow sending HTTP hooks are:
 - backup
@@ -508,6 +508,7 @@ global {
 
 {{% /tab %}}
 {{% /tabs %}}
+
 
 
 

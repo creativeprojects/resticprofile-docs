@@ -8,6 +8,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"regexp"
 
 	"github.com/creativeprojects/clog"
 	"github.com/pelletier/go-toml/v2"
@@ -28,6 +29,7 @@ var (
 	}
 	regexpReplacements = [][]string{
 		{`{{<\s*ref\s+"([^"]*)"\s*>}}`, `{{% ref "$1" %}}`},
+		{`{{%(\s*)attachments\s+`, `{{%${1}resources `},
 	}
 )
 
@@ -70,7 +72,7 @@ func cleanupMD(path string) error {
 	if err != nil {
 		return err
 	}
-	var headerTOML, headerYAML bool
+	var headerTOML, headerYAML, hasHeader bool
 	var bufferTOML, bufferYAML = &bytes.Buffer{}, &bytes.Buffer{}
 	var lineNum int
 	lines := bytes.Split(content, []byte{'\n'})
@@ -80,6 +82,7 @@ func cleanupMD(path string) error {
 		lineStr := string(line)
 		if lineStr == tagTOML {
 			clog.Tracef("TOML marker on line %d", lineNum)
+			hasHeader = true
 			headerTOML = !headerTOML
 			if !headerTOML {
 				break
@@ -88,6 +91,7 @@ func cleanupMD(path string) error {
 		}
 		if lineStr == tagYAML {
 			clog.Tracef("YAML marker on line %d", lineNum)
+			hasHeader = true
 			headerYAML = !headerYAML
 			if !headerYAML {
 				break
@@ -95,11 +99,11 @@ func cleanupMD(path string) error {
 			continue
 		}
 		if headerTOML {
-			bufferTOML.Write(line)
-			bufferTOML.WriteByte('\n')
+			_, _ = bufferTOML.Write(line)
+			_ = bufferTOML.WriteByte('\n')
 		} else if headerYAML {
-			bufferYAML.Write(line)
-			bufferYAML.WriteByte('\n')
+			_, _ = bufferYAML.Write(line)
+			_ = bufferYAML.WriteByte('\n')
 		}
 	}
 	headerChanged := false
@@ -122,6 +126,11 @@ func cleanupMD(path string) error {
 		}
 	}
 
+	if !hasHeader {
+		// the remaining is the whole content
+		lineNum = 0
+	}
+
 	remainingLines, contentChanged := cleanContent(lines[lineNum:])
 	if headerChanged || contentChanged {
 		clog.Debugf("rewrite needed: %+v\n", header)
@@ -140,19 +149,23 @@ func rewriteMD(filename string, header map[string]any, lines [][]byte) error {
 		return err
 	}
 	defer file.Close()
-	err = writeLine(file, []byte(tagYAML))
-	if err != nil {
-		return err
+
+	if len(header) > 0 {
+		err = writeLine(file, []byte(tagYAML))
+		if err != nil {
+			return err
+		}
+		encoder := yaml.NewEncoder(file)
+		err = encoder.Encode(header)
+		if err != nil {
+			return err
+		}
+		err = writeLine(file, []byte(tagYAML))
+		if err != nil {
+			return err
+		}
 	}
-	encoder := yaml.NewEncoder(file)
-	err = encoder.Encode(header)
-	if err != nil {
-		return err
-	}
-	err = writeLine(file, []byte(tagYAML))
-	if err != nil {
-		return err
-	}
+
 	for _, line := range lines {
 		err = writeLine(file, line)
 		if err != nil {
@@ -179,6 +192,13 @@ func cleanContent(lines [][]byte) ([][]byte, bool) {
 			if bytes.Contains(line, []byte(replacement[0])) {
 				changed = true
 				line = bytes.Replace(line, []byte(replacement[0]), []byte(replacement[1]), 1)
+			}
+		}
+		for _, replacement := range regexpReplacements {
+			pattern := regexp.MustCompile(replacement[0])
+			if pattern.Find(line) != nil {
+				changed = true
+				line = pattern.ReplaceAll(line, []byte(replacement[1]))
 			}
 		}
 		output[i] = line

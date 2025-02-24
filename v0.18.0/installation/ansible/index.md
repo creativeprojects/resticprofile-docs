@@ -7,7 +7,7 @@ weight: 15
 
 Installation using Ansible is not streamlined, but here's the playbook I'm using on my servers:
 
-{{%attachments title="Playbooks" pattern=".*"/%}}
+{{%resources title="Playbooks" pattern=".*"/%}}
 
 This is very much work in progress. Once I get a stable ansible script I should publish it to Ansible Galaxy.
 
@@ -42,4 +42,5 @@ arch: linux_armv7
 ```
 
 Note: _I might find a way to detect this automatically at some point_
+
 
