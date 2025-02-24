@@ -1,6 +1,5 @@
 ---
-title: "Copy command"
-tags: ["v0.18.0"]
+title: Copy command
 weight: 17
 ---
 
@@ -122,3 +121,4 @@ profile {
 
 {{% /tab %}}
 {{% /tabs %}}
+

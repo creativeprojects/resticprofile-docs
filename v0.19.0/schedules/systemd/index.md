@@ -1,6 +1,5 @@
 ---
-title: "Systemd"
-date: 2022-05-16T20:11:58+01:00
+title: Systemd
 weight: 105
 ---
 
@@ -140,3 +139,4 @@ These are available for both the unit and timer templates:
 * SystemdProfile   *string*
 * Nice             *integer*
 * Environment      *array of strings*
+

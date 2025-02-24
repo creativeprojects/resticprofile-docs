@@ -1,6 +1,5 @@
 ---
-title: "Ansible"
-date: 2022-04-23T23:47:41+01:00
+title: Ansible
 weight: 15
 ---
 
@@ -43,3 +42,4 @@ arch: linux_armv7
 ```
 
 Note: _I might find a way to detect this automatically at some point_
+

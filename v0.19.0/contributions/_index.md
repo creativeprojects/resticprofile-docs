@@ -1,9 +1,9 @@
-+++
-chapter = true
-pre = "<b>6. </b>"
-title = "Contributions"
-weight = 40
-+++
+---
+chapter: true
+pre: <b>6. </b>
+title: Contributions
+weight: 40
+---
 
 # Contributions
 

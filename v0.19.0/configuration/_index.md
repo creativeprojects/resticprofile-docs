@@ -1,9 +1,9 @@
-+++
-chapter = true
-pre = "<b>2. </b>"
-title = "Configuration"
-weight = 10
-+++
+---
+chapter: true
+pre: <b>2. </b>
+title: Configuration
+weight: 10
+---
 
 
 # Configuration file
@@ -125,3 +125,4 @@ Using the basic configuration from earlier, and taking into account that the con
 ## More information
 
 {{% children  %}}
+

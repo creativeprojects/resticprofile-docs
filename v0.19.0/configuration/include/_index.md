@@ -1,6 +1,5 @@
 ---
-title: "Include"
-date: 2022-05-02T20:00:00+02:00
+title: Include
 weight: 15
 ---
 
@@ -185,4 +184,5 @@ default:
 `resticprofile` prior to v0.18.0 had a slightly different behavior when merging configuration properties of a different type (e.g. number <-> text or list <-> single value). In such cases the existing value was not overridden by an included file, breaking the rule "what includes later overrides what defines earlier".
 
 {{% /notice %}}
+
 

@@ -1,6 +1,5 @@
 ---
-title: "Configuration templates"
-date: 2022-05-16T20:04:35+01:00
+title: Configuration templates
 weight: 26
 ---
 
@@ -566,3 +565,4 @@ There are a lot more you can do with configuration templates. If you're brave en
 
 For a more end-user kind of documentation, you can also read [hugo documentation on templates](https://gohugo.io/templates/introduction/) which is using the same Go implementation, but don't talk much about the developer side of it.
 Please note there are some functions only made available by hugo though.
+

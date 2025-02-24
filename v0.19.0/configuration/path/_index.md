@@ -1,6 +1,5 @@
 ---
-title: "Path"
-date: 2022-04-24T09:44:41+01:00
+title: Path
 weight: 10
 ---
 
@@ -58,3 +57,4 @@ resticprofile will search for your configuration file in these folders:
 - c:\restic\
 - c:\resticprofile\
 - %USERPROFILE%\
+

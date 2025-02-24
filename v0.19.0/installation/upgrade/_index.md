@@ -1,6 +1,5 @@
 ---
-title: "Upgrade"
-date: 2022-04-23T23:57:06+01:00
+title: Upgrade
 weight: 20
 ---
 
@@ -23,3 +22,4 @@ and since version 0.11.0:
 ```shell
 $ resticprofile self-update --quiet
 ```
+
