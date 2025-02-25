@@ -9,6 +9,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"strings"
 
 	"github.com/creativeprojects/clog"
 	"github.com/pelletier/go-toml/v2"
@@ -23,6 +24,7 @@ const (
 
 var (
 	removeHeaders      = []string{"date", "tags"}
+	domainReplacement  = []string{}
 	simpleReplacements = [][]string{
 		{"tabs groupId=", "tabs groupid="},
 		{"tab name=", "tab title="},
@@ -69,6 +71,10 @@ func cleanupDocs(root string) error {
 }
 
 func cleanupMD(path string) error {
+	version, _, found := strings.Cut(strings.TrimPrefix(path, "./"), "/")
+	if !found {
+		return fmt.Errorf("cannot detect version of file to clean: %q", path)
+	}
 	content, err := os.ReadFile(path)
 	if err != nil {
 		return err
@@ -132,6 +138,11 @@ func cleanupMD(path string) error {
 		lineNum = 0
 	}
 
+	domainReplacement = []string{
+		"https://creativeprojects.github.io/resticprofile",
+		fmt.Sprintf("https://dev.resticprofile.pages.dev/%s", version),
+	}
+
 	remainingLines, contentChanged := cleanContent(lines[lineNum:])
 	if headerChanged || contentChanged {
 		clog.Debugf("rewrite needed: %+v\n", header)
@@ -189,6 +200,12 @@ func cleanContent(lines [][]byte) ([][]byte, bool) {
 	changed := false
 	output := make([][]byte, len(lines))
 	for i, line := range lines {
+
+		if bytes.Contains(line, []byte(domainReplacement[0])) {
+			changed = true
+			line = bytes.Replace(line, []byte(domainReplacement[0]), []byte(domainReplacement[1]), 1)
+		}
+
 		for _, replacement := range simpleReplacements {
 			if bytes.Contains(line, []byte(replacement[0])) {
 				changed = true

@@ -54,11 +54,7 @@ func createSnapshots() error {
 			if errors.Is(err, fs.ErrNotExist) || destInfo == nil {
 				// generates reference files first
 				if reference == "generated" {
-					cmd := exec.Command("make", "generate-jsonschema", "generate-config-reference")
-					cmd.Dir = source
-					cmd.Stdout = os.Stdout
-					cmd.Stderr = os.Stderr
-					err = cmd.Run()
+					err = generateReference(source, version)
 					if err != nil {
 						return err
 					}
@@ -152,4 +148,16 @@ func copyDocs(source, dest string) error {
 		}
 		return w.Close()
 	})
+}
+
+func generateReference(source, version string) error {
+	cmd := exec.Command("make", "generate-jsonschema", "generate-config-reference")
+	cmd.Dir = source
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err := cmd.Run()
+	if err != nil {
+		return err
+	}
+	return nil
 }
