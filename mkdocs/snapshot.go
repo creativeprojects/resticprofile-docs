@@ -38,15 +38,16 @@ func createSnapshots() error {
 		os.Exit(1)
 	}
 	err = tagrefs.ForEach(func(t *plumbing.Reference) error {
-		clog.Debugf("--> tag %s", t.Name().Short())
+		version := t.Name().Short()
+		clog.Debugf("--> tag %s", version)
 		err := worktree.Checkout(&git.CheckoutOptions{Branch: t.Name()})
 		if err != nil {
 			clog.Warningf("cannot checkout %q: %s", t.Name(), err)
 		}
-		found, reference := detectDocumentation(t.Name().Short(), worktree)
-		if found {
+		found, reference := detectDocumentation(version, worktree)
+		if found && version == "v0.21.0" {
 			from := filepath.Join(source, "docs/content")
-			to := filepath.Join("./", t.Name().Short())
+			to := filepath.Join("./", version)
 			destInfo, err := os.Stat(to)
 
 			// don't recreate the snapshot if it already exists
