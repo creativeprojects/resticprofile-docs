@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"os"
-	"strings"
 
 	"github.com/creativeprojects/clog"
 )
@@ -25,12 +24,7 @@ func main() {
 		err = createSnapshots()
 
 	case "cleanup":
-		version := flag.Arg(1)
-		if version == "" || !strings.HasPrefix(version, "v") {
-			clog.Error("please specify which version (of file path) to cleanup: mkdocs cleanup v0.18.0")
-			os.Exit(1)
-		}
-		err = cleanupDocs(version)
+		err = cleanupDocs(versionsPathPrefix)
 
 	case "generate":
 		err = generateDocs()

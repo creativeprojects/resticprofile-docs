@@ -4,9 +4,6 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-
-	"github.com/creativeprojects/clog"
-	"github.com/go-git/go-git/v5"
 )
 
 const (
@@ -14,53 +11,51 @@ const (
 )
 
 func generateDocs() error {
-	source := "./source"
-	repo, err := openRepo(source)
-	if err != nil {
-		return fmt.Errorf("cannot load repository: %w", err)
-	}
-	worktree, err := repo.Worktree()
-	if err != nil {
-		return fmt.Errorf("cannot load worktree: %w", err)
-	}
+	// sourceRepo, err := openSourceRepo(sourceRepositoryPath)
+	// if err != nil {
+	// 	return fmt.Errorf("cannot load repository: %w", err)
+	// }
+	// worktree, err := sourceRepo.Worktree()
+	// if err != nil {
+	// 	return fmt.Errorf("cannot load worktree: %w", err)
+	// }
 	// stop using shitty submodules
-	theme, err := worktree.Submodule(themeSubmoduleName)
+	// theme, err := worktree.Submodule(themeSubmoduleName)
+	// if err != nil {
+	// 	return fmt.Errorf("cannot find submodule: %w", err)
+	// }
+	// status, err := theme.Status()
+	// if err != nil {
+	// 	return fmt.Errorf("cannot load submodule status: %w", err)
+	// }
+	// themeCommit := status.Expected.String()
+	// clog.Infof("cloning or updating theme to %s", themeCommit)
+	themeRepo, err := openThemeRepo(themeRepositoryPath, themeVersionTag)
 	if err != nil {
-		return fmt.Errorf("cannot find submodule: %w", err)
+		return fmt.Errorf("cannot clone or update theme repository: %w", err)
 	}
-	status, err := theme.Status()
-	if err != nil {
-		return fmt.Errorf("cannot load submodule status: %w", err)
-	}
-	clog.Infof("updating theme submodule to %s", status.Expected.String())
-	err = theme.Update(&git.SubmoduleUpdateOptions{
-		Init:  true,
-		Depth: 1,
-	})
-	if err != nil {
-		return fmt.Errorf("cannot update git submodule: %w", err)
-	}
+	themeRepo.Head()
 
-	versions, err := getVersions("./")
-	if err != nil {
-		return fmt.Errorf("cannot load versions: %w", err)
-	}
+	// versions, err := getVersions(versionsPathPrefix)
+	// if err != nil {
+	// 	return fmt.Errorf("cannot load versions: %w", err)
+	// }
 
-	err = os.Rename("./source/docs/content", "./source/docs/content___")
-	if err != nil {
-		return fmt.Errorf("cannot rename content: %w", err)
-	}
-	for _, version := range versions {
-		clog.Debugf("generating version %s", version)
-		err = generateDocVersion(version)
-		if err != nil {
-			return err
-		}
-	}
-	err = os.Rename("./source/docs/content___", "./source/docs/content")
-	if err != nil {
-		return fmt.Errorf("cannot rename content: %w", err)
-	}
+	// err = os.Rename("./source/docs/content", "./source/docs/content___")
+	// if err != nil {
+	// 	return fmt.Errorf("cannot rename content: %w", err)
+	// }
+	// for _, version := range versions {
+	// 	clog.Debugf("generating version %s", version)
+	// 	err = generateDocVersion(version)
+	// 	if err != nil {
+	// 		return err
+	// 	}
+	// }
+	// err = os.Rename("./source/docs/content___", "./source/docs/content")
+	// if err != nil {
+	// 	return fmt.Errorf("cannot rename content: %w", err)
+	// }
 	return nil
 }
 
@@ -78,6 +73,7 @@ func generateDocVersion(version string) error {
 		"--cleanDestinationDir",
 		"--destination", fmt.Sprintf("../public/%s", version),
 		"--baseURL", fmt.Sprintf("https://dev.resticprofile.pages.dev/%s", version),
+		"--themesDir", "../../themes",
 	)
 	cmd.Dir = "./source/docs"
 	cmd.Stdout = os.Stdout

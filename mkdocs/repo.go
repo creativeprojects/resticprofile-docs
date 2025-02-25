@@ -7,14 +7,15 @@ import (
 
 	"github.com/creativeprojects/clog"
 	"github.com/go-git/go-git/v5"
+	"github.com/go-git/go-git/v5/plumbing"
 )
 
-func openRepo(path string) (*git.Repository, error) {
+func openSourceRepo(path string) (*git.Repository, error) {
 	_ = os.MkdirAll(path, 0o700)
 	repo, err := git.PlainOpen(path)
 	if err != nil {
 		clog.Info("source empty, cloning repository...")
-		repo, err = git.PlainClone(path, false, &git.CloneOptions{URL: "https://github.com/creativeprojects/resticprofile.git"})
+		repo, err = git.PlainClone(path, false, &git.CloneOptions{URL: sourceRepositoryURL})
 		if err != nil {
 			return nil, fmt.Errorf("cannot clone git repository: %w", err)
 		}
@@ -35,5 +36,36 @@ func openRepo(path string) (*git.Repository, error) {
 	if err != nil && !errors.Is(err, git.NoErrAlreadyUpToDate) {
 		return nil, fmt.Errorf("cannot pull from remote: %w", err)
 	}
+	return repo, nil
+}
+
+func openThemeRepo(path, reference string) (*git.Repository, error) {
+	_ = os.MkdirAll(path, 0o700)
+	repo, err := git.PlainOpen(path)
+	if err != nil {
+		clog.Info("source empty, cloning repository...")
+		repo, err = git.PlainClone(path, false, &git.CloneOptions{
+			URL:           themeRepositoryURL,
+			ReferenceName: plumbing.ReferenceName(reference),
+			Depth:         1,
+			Progress:      os.Stdout,
+		})
+		if err != nil {
+			return nil, fmt.Errorf("cannot clone git repository: %w", err)
+		}
+	}
+
+	worktree, err := repo.Worktree()
+	if err != nil {
+		return nil, fmt.Errorf("cannot load worktree: %w", err)
+	}
+	status, err := worktree.Status()
+	if err != nil {
+		return nil, fmt.Errorf("cannot get status: %w", err)
+	}
+	if !status.IsClean() {
+		return nil, errors.New("repository is not clean")
+	}
+
 	return repo, nil
 }

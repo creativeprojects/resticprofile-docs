@@ -38,7 +38,7 @@ var (
 
 func cleanupDocs(root string) error {
 	if root == "" {
-		return errors.New("invalid version")
+		return errors.New("please specify a path of file(s) to cleanup")
 	}
 	// single file?
 	finfo, err := os.Stat(root)

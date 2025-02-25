@@ -22,8 +22,7 @@ var (
 )
 
 func createSnapshots() error {
-	source := "./source"
-	repo, err := openRepo(source)
+	repo, err := openSourceRepo(sourceRepositoryPath)
 	if err != nil {
 		return err
 	}
@@ -52,20 +51,20 @@ func createSnapshots() error {
 		}
 		found, reference := detectDocumentation(version, worktree)
 		if found && slices.Contains(versions, version) {
-			target := filepath.Join("./versions", version)
+			target := filepath.Join(versionsPathPrefix, version)
 			destInfo, err := os.Stat(target)
 
 			// don't recreate the snapshot if it already exists
 			if errors.Is(err, fs.ErrNotExist) || destInfo == nil {
 				// generates reference files first
 				if reference == "generated" {
-					err = generateReference(source, version)
+					err = generateReference(sourceRepositoryPath, version)
 					if err != nil {
 						return err
 					}
 				}
 				// copy content files to versioned directory
-				from := filepath.Join(source, "docs/content")
+				from := filepath.Join(sourceRepositoryPath, "docs/content")
 				to := filepath.Join(target, "content")
 				_ = os.MkdirAll(to, 0o777)
 				clog.Infof("copying %q to %q", from, to)
@@ -73,9 +72,9 @@ func createSnapshots() error {
 				if err != nil {
 					clog.Warningf("cannot copy files: %s", err)
 				}
-				_ = copyFile(filepath.Join(source, "Makefile"), filepath.Join(target, "Makefile"))
+				_ = copyFile(filepath.Join(sourceRepositoryPath, "Makefile"), filepath.Join(target, "Makefile"))
 				// copy JSON schema
-				from = filepath.Join(source, "docs/static/jsonschema")
+				from = filepath.Join(sourceRepositoryPath, "docs/static/jsonschema")
 				finfo, err := os.Stat(from)
 				if err == nil && finfo != nil && finfo.IsDir() {
 					to = filepath.Join(target, "jsonschema")
