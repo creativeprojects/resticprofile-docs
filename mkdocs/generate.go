@@ -23,6 +23,7 @@ func generateDocs() error {
 	if err != nil {
 		return fmt.Errorf("cannot load worktree: %w", err)
 	}
+	// stop using shitty submodules
 	theme, err := worktree.Submodule(themeSubmoduleName)
 	if err != nil {
 		return fmt.Errorf("cannot find submodule: %w", err)
