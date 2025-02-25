@@ -203,13 +203,13 @@ func cleanContent(lines [][]byte) ([][]byte, bool) {
 
 		if bytes.Contains(line, []byte(domainReplacement[0])) {
 			changed = true
-			line = bytes.Replace(line, []byte(domainReplacement[0]), []byte(domainReplacement[1]), 1)
+			line = bytes.ReplaceAll(line, []byte(domainReplacement[0]), []byte(domainReplacement[1]))
 		}
 
 		for _, replacement := range simpleReplacements {
 			if bytes.Contains(line, []byte(replacement[0])) {
 				changed = true
-				line = bytes.Replace(line, []byte(replacement[0]), []byte(replacement[1]), 1)
+				line = bytes.ReplaceAll(line, []byte(replacement[0]), []byte(replacement[1]))
 			}
 		}
 		for _, replacement := range regexpReplacements {

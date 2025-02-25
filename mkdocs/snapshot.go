@@ -3,16 +3,22 @@ package main
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"io"
 	"io/fs"
 	"os"
 	"os/exec"
 	"path/filepath"
+	"slices"
 	"strings"
 
 	"github.com/creativeprojects/clog"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
+)
+
+var (
+	versions = []string{"v0.18.0", "v0.19.0", "v0.20.0", "v0.21.0"}
 )
 
 func createSnapshots() error {
@@ -45,10 +51,9 @@ func createSnapshots() error {
 			clog.Warningf("cannot checkout %q: %s", t.Name(), err)
 		}
 		found, reference := detectDocumentation(version, worktree)
-		if found && version == "v0.21.0" {
-			from := filepath.Join(source, "docs/content")
-			to := filepath.Join("./", version)
-			destInfo, err := os.Stat(to)
+		if found && slices.Contains(versions, version) {
+			target := filepath.Join("./versions", version)
+			destInfo, err := os.Stat(target)
 
 			// don't recreate the snapshot if it already exists
 			if errors.Is(err, fs.ErrNotExist) || destInfo == nil {
@@ -59,16 +64,31 @@ func createSnapshots() error {
 						return err
 					}
 				}
-				// copy md files to versioned directory
+				// copy content files to versioned directory
+				from := filepath.Join(source, "docs/content")
+				to := filepath.Join(target, "content")
 				_ = os.MkdirAll(to, 0o777)
 				clog.Infof("copying %q to %q", from, to)
-				err = copyDocs(from, to)
+				err = copyFiles(from, to)
 				if err != nil {
 					clog.Warningf("cannot copy files: %s", err)
 				}
+				_ = copyFile(filepath.Join(source, "Makefile"), filepath.Join(target, "Makefile"))
+				// copy JSON schema
+				from = filepath.Join(source, "docs/static/jsonschema")
+				finfo, err := os.Stat(from)
+				if err == nil && finfo != nil && finfo.IsDir() {
+					to = filepath.Join(target, "jsonschema")
+					_ = os.MkdirAll(to, 0o777)
+					clog.Infof("copying %q to %q", from, to)
+					err = copyFiles(from, to)
+					if err != nil {
+						clog.Warningf("cannot copy files: %s", err)
+					}
+				}
 			}
 
-			err = cleanupDocs(to)
+			err = cleanupDocs(target)
 			if err != nil {
 				clog.Warning(err)
 			}
@@ -113,7 +133,7 @@ func detectDocumentation(tagRef string, worktree *git.Worktree) (bool, string) {
 	return true, reference
 }
 
-func copyDocs(source, dest string) error {
+func copyFiles(source, dest string) error {
 	return filepath.WalkDir(source, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
@@ -124,30 +144,31 @@ func copyDocs(source, dest string) error {
 			return os.MkdirAll(newPath, 0777)
 		}
 
-		if !d.Type().IsRegular() {
-			return &fs.PathError{Path: path, Err: fs.ErrInvalid}
-		}
-
-		r, err := os.Open(path)
-		if err != nil {
-			return err
-		}
-		defer r.Close()
-		info, err := r.Stat()
-		if err != nil {
-			return err
-		}
-		w, err := os.OpenFile(newPath, os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0666|info.Mode()&0777)
-		if err != nil {
-			return err
-		}
-
-		if _, err := io.Copy(w, r); err != nil {
-			w.Close()
-			return &fs.PathError{Path: newPath, Err: err}
-		}
-		return w.Close()
+		return copyFile(path, newPath)
 	})
+}
+
+func copyFile(sourceFile, targetFile string) error {
+	r, err := os.Open(sourceFile)
+	if err != nil {
+		return err
+	}
+	defer r.Close()
+
+	info, err := r.Stat()
+	if err != nil {
+		return err
+	}
+	w, err := os.OpenFile(targetFile, os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0666|info.Mode()&0777)
+	if err != nil {
+		return err
+	}
+
+	if _, err := io.Copy(w, r); err != nil {
+		w.Close()
+		return fmt.Errorf("writing to %q: %w", targetFile, err)
+	}
+	return w.Close()
 }
 
 func generateReference(source, version string) error {
