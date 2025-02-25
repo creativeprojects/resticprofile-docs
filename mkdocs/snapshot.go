@@ -2,9 +2,11 @@ package main
 
 import (
 	"bytes"
+	"errors"
 	"io"
 	"io/fs"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
 
@@ -42,12 +44,25 @@ func createSnapshots() error {
 			clog.Warningf("cannot checkout %q: %s", t.Name(), err)
 		}
 		found, reference := detectDocumentation(t.Name().Short(), worktree)
-		if found && reference == "none" {
+		if found {
 			from := filepath.Join(source, "docs/content")
 			to := filepath.Join("./", t.Name().Short())
 			destInfo, err := os.Stat(to)
+
 			// don't recreate the snapshot if it already exists
-			if err == fs.ErrNotExist && destInfo == nil {
+			if errors.Is(err, fs.ErrNotExist) || destInfo == nil {
+				// generates reference files first
+				if reference == "generated" {
+					cmd := exec.Command("make", "generate-jsonschema", "generate-config-reference")
+					cmd.Dir = source
+					cmd.Stdout = os.Stdout
+					cmd.Stderr = os.Stderr
+					err = cmd.Run()
+					if err != nil {
+						return err
+					}
+				}
+				// copy md files to versioned directory
 				_ = os.MkdirAll(to, 0o777)
 				clog.Infof("copying %q to %q", from, to)
 				err = copyDocs(from, to)
@@ -55,6 +70,7 @@ func createSnapshots() error {
 					clog.Warningf("cannot copy files: %s", err)
 				}
 			}
+
 			err = cleanupDocs(to)
 			if err != nil {
 				clog.Warning(err)
@@ -75,30 +91,27 @@ func createSnapshots() error {
 }
 
 func detectDocumentation(tagRef string, worktree *git.Worktree) (bool, string) {
-	reference := "none"
+	reference := "static"
 	finfo, err := worktree.Filesystem.Stat("/docs")
 	if err != nil || finfo == nil || !finfo.IsDir() {
 		return false, ""
 	}
-	finfo, err = worktree.Filesystem.Stat("/docs/content/reference")
-	if err == nil && finfo != nil && finfo.IsDir() {
-		reference = "static"
-	} else {
-		file, err := worktree.Filesystem.Open("/Makefile")
-		if err != nil {
-			clog.Errorf("cannot open Makefile: %s", err)
-			return true, reference
-		}
-		defer file.Close()
-		makefile, err := io.ReadAll(file)
-		if err != nil {
-			clog.Errorf("cannot read Makefile: %s", err)
-			return true, reference
-		}
-		if bytes.Contains(makefile, []byte("reference")) {
-			reference = "generated"
-		}
+
+	file, err := worktree.Filesystem.Open("/Makefile")
+	if err != nil {
+		clog.Errorf("cannot open Makefile: %s", err)
+		return true, reference
 	}
+	defer file.Close()
+	makefile, err := io.ReadAll(file)
+	if err != nil {
+		clog.Errorf("cannot read Makefile: %s", err)
+		return true, reference
+	}
+	if bytes.Contains(makefile, []byte("reference")) {
+		reference = "generated"
+	}
+
 	clog.Infof("documentation found in tag %s with reference: %s", tagRef, reference)
 	return true, reference
 }

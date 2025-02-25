@@ -70,7 +70,14 @@ func generateDocVersion(version string) error {
 	}
 	defer os.Remove("./source/docs/content")
 
-	cmd := exec.Command("hugo", "build", "--minify", "--cleanDestinationDir", "--destination", fmt.Sprintf("../public/%s", version))
+	cmd := exec.Command(
+		"hugo",
+		"build",
+		"--minify",
+		"--cleanDestinationDir",
+		"--destination", fmt.Sprintf("../public/%s", version),
+		"--baseURL", fmt.Sprintf("https://dev.resticprofile.pages.dev/%s", version),
+	)
 	cmd.Dir = "./source/docs"
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
