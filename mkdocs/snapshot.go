@@ -87,7 +87,7 @@ func createSnapshots() error {
 				}
 			}
 
-			err = cleanupDocs(target)
+			err = cleanupDocs(target, version)
 			if err != nil {
 				clog.Warning(err)
 			}

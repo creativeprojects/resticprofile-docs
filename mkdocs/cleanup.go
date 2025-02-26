@@ -9,7 +9,6 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
-	"strings"
 
 	"github.com/creativeprojects/clog"
 	"github.com/pelletier/go-toml/v2"
@@ -23,8 +22,11 @@ const (
 )
 
 var (
-	removeHeaders      = []string{"date", "tags"}
-	domainReplacement  = []string{}
+	removeHeaders     = []string{"date", "tags"}
+	domainReplacement = []string{
+		"https://creativeprojects.github.io/resticprofile",
+		"https://dev.resticprofile.pages.dev/%s",
+	}
 	simpleReplacements = [][]string{
 		{"tabs groupId=", "tabs groupid="},
 		{"tab name=", "tab title="},
@@ -36,7 +38,7 @@ var (
 	}
 )
 
-func cleanupDocs(root string) error {
+func cleanupDocs(root, version string) error {
 	if root == "" {
 		return errors.New("please specify a path of file(s) to cleanup")
 	}
@@ -47,7 +49,7 @@ func cleanupDocs(root string) error {
 	}
 	if !finfo.IsDir() {
 		if filepath.Ext(root) == fileExt {
-			return cleanupMD(root)
+			return cleanupMD(root, version)
 		}
 		return fmt.Errorf("not a directory: %q", root)
 	}
@@ -62,7 +64,7 @@ func cleanupDocs(root string) error {
 			return nil
 		}
 		clog.Debugf("cleaning up %q", path)
-		err = cleanupMD(path)
+		err = cleanupMD(path, version)
 		if err != nil {
 			clog.Warning("cleaning up %q: %s", path, err)
 		}
@@ -70,11 +72,7 @@ func cleanupDocs(root string) error {
 	})
 }
 
-func cleanupMD(path string) error {
-	version, _, found := strings.Cut(strings.TrimPrefix(path, "./"), "/")
-	if !found {
-		return fmt.Errorf("cannot detect version of file to clean: %q", path)
-	}
+func cleanupMD(path, version string) error {
 	content, err := os.ReadFile(path)
 	if err != nil {
 		return err
@@ -138,12 +136,7 @@ func cleanupMD(path string) error {
 		lineNum = 0
 	}
 
-	domainReplacement = []string{
-		"https://creativeprojects.github.io/resticprofile",
-		fmt.Sprintf("https://dev.resticprofile.pages.dev/%s", version),
-	}
-
-	remainingLines, contentChanged := cleanContent(lines[lineNum:])
+	remainingLines, contentChanged := cleanContent(lines[lineNum:], version)
 	if headerChanged || contentChanged {
 		clog.Debugf("rewrite needed: %+v\n", header)
 		return rewriteMD(path, header, remainingLines)
@@ -196,27 +189,37 @@ func writeLine(w io.Writer, content []byte) error {
 	return err
 }
 
-func cleanContent(lines [][]byte) ([][]byte, bool) {
+func cleanContent(lines [][]byte, version string) ([][]byte, bool) {
 	changed := false
 	output := make([][]byte, len(lines))
 	for i, line := range lines {
 
 		if bytes.Contains(line, []byte(domainReplacement[0])) {
 			changed = true
-			line = bytes.ReplaceAll(line, []byte(domainReplacement[0]), []byte(domainReplacement[1]))
+			line = bytes.ReplaceAll(
+				line,
+				[]byte(domainReplacement[0]),
+				[]byte(fmt.Sprintf(domainReplacement[1], version)),
+			)
 		}
 
 		for _, replacement := range simpleReplacements {
 			if bytes.Contains(line, []byte(replacement[0])) {
 				changed = true
-				line = bytes.ReplaceAll(line, []byte(replacement[0]), []byte(replacement[1]))
+				line = bytes.ReplaceAll(
+					line,
+					[]byte(replacement[0]),
+					[]byte(replacement[1]),
+				)
 			}
 		}
 		for _, replacement := range regexpReplacements {
 			pattern := regexp.MustCompile(replacement[0])
 			if pattern.Find(line) != nil {
 				changed = true
-				line = pattern.ReplaceAll(line, []byte(replacement[1]))
+				line = pattern.ReplaceAll(
+					line,
+					[]byte(replacement[1]))
 			}
 		}
 		output[i] = line

@@ -23,14 +23,19 @@ func main() {
 	case "snapshot":
 		err = createSnapshots()
 
-	case "cleanup":
-		err = cleanupDocs(versionsPathPrefix)
-
 	case "theme":
 		err = prepareTheme()
 
 	case "generate":
 		err = generateDocs()
+
+	case "serve":
+		version := flag.Arg(1)
+		if version == "" {
+			clog.Errorf("missing version: mkdocs serve v0.21.0")
+			os.Exit(1)
+		}
+		err = serveDocVersion(version)
 
 	default:
 		clog.Info("please specify any of the commands: [snapshot, cleanup or generate]")
