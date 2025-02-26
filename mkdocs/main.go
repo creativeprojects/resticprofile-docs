@@ -26,6 +26,9 @@ func main() {
 	case "cleanup":
 		err = cleanupDocs(versionsPathPrefix)
 
+	case "theme":
+		err = prepareTheme()
+
 	case "generate":
 		err = generateDocs()
 

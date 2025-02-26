@@ -5,6 +5,7 @@ const (
 	sourceRepositoryPath = "./source"
 	themeRepositoryPath  = "./themes/hugo-theme-relearn"
 	sourceRepositoryURL  = "https://github.com/creativeprojects/resticprofile.git"
-	themeRepositoryURL   = "https://github.com/McShelby/hugo-theme-relearn.git"
-	themeVersionTag      = "refs/tags/7.4.1"
+	themeVersionTag      = "7.4.1"
+	themeRepositoryOwner = "McShelby"
+	themeRepositoryName  = "hugo-theme-relearn"
 )
