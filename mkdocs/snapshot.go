@@ -24,7 +24,7 @@ var (
 func createSnapshots() error {
 	repo, err := openSourceRepo(sourceRepositoryPath)
 	if err != nil {
-		return err
+		return fmt.Errorf("cannot open source repository: %w", err)
 	}
 	worktree, err := repo.Worktree()
 	if err != nil {
@@ -87,7 +87,7 @@ func createSnapshots() error {
 				}
 			}
 
-			err = cleanupDocs(target, version)
+			err = cleanupDocs(target)
 			if err != nil {
 				clog.Warning(err)
 			}

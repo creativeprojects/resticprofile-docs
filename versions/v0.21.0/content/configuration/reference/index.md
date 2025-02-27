@@ -66,7 +66,7 @@ settings for resticprofile.
 
 | Name              | Type                    | Default  | Notes |
 |:------------------|:------------------------|:---------|:------|
-| **ca-certificates** |one or more `strings` | |Path to PEM encoded certificates to trust in addition to system certificates when resticprofile sends to a webhook - see [configuration/http_hooks/](https://dev.resticprofile.pages.dev/v0.21.0/configuration/http_hooks/) |
+| **ca-certificates** |one or more `strings` | |Path to PEM encoded certificates to trust in addition to system certificates when resticprofile sends to a webhook - see [configuration/http_hooks/]({{% relref "/configuration/http_hooks/" %}}) |
 | **default-command** |`string` |`snapshots` |The restic or resticprofile command to use when no command was specified. **Examples**: `backup`, `cache`, `cat`, `check`, `copy`, `diff`, `dump`, `find`, `forget`, `generate`, `init`, `key`, `list`, `ls`, `migrate`, `mount`, `prune`, `rebuild-index`, `recover`, `restore`, `rewrite`, `self-update`, `snapshots`, `stats`, `tag`, `unlock`, `version`  |
 | **group-continue-on-error** |`true` / `false` |`false` |Enable groups to continue with the next profile(s) instead of stopping at the first failure |
 | **initialize** |`true` / `false` |`false` |Initialize a repository if missing |
@@ -74,19 +74,19 @@ settings for resticprofile.
 | **ionice-class** |`integer` |`2` |Sets the unix "ionice-class" to apply when "ionice" is enabled. Must be >= 1 and  <= 3  |
 | **ionice-level** |`integer` |`0` |Sets the unix "ionice-level" to apply when "ionice" is enabled. Must be >= 0 and  <= 7  |
 | ~~legacy-arguments~~ |`true` / `false` |`false` |Legacy, broken arguments mode of resticprofile before version 0.15 |
-| **min-memory** |`integer` |`100` |Minimum available memory (in MB) required to run any commands - see [usage/memory/](https://dev.resticprofile.pages.dev/v0.21.0/usage/memory/) |
+| **min-memory** |`integer` |`100` |Minimum available memory (in MB) required to run any commands - see [usage/memory/]({{% relref "/usage/memory/" %}}) |
 | **nice** |`integer` |`0` |Sets the unix "nice" value for resticprofile and child processes (on any OS). Must be >= -20 and  <= 19  |
-| **prevent-sleep** |`true` / `false` |`false` |Prevent the system from sleeping while running commands - see [configuration/sleep/](https://dev.resticprofile.pages.dev/v0.21.0/configuration/sleep/) |
+| **prevent-sleep** |`true` / `false` |`false` |Prevent the system from sleeping while running commands - see [configuration/sleep/]({{% relref "/configuration/sleep/" %}}) |
 | **priority** |`string` |`normal` |Sets process priority class for resticprofile and child processes (on any OS). Is one of `idle`, `background`, `low`, `normal`, `high`, `highest`  |
 | **restic-arguments-filter** |`true` / `false` |`true` |Remove unknown flags instead of passing all configured flags to restic |
 | **restic-binary** |`string` | |Full path of the restic executable (detected if not set) |
-| **restic-lock-retry-after** |`integer` OR `duration` |`1m` |Time to wait before trying to get a lock on a restic repositoey - see [usage/locks/](https://dev.resticprofile.pages.dev/v0.21.0/usage/locks/) |
-| **restic-stale-lock-age** |`integer` OR `duration` |`2h` |The age an unused lock on a restic repository must have at least before resiticprofile attempts to unlock - see [usage/locks/](https://dev.resticprofile.pages.dev/v0.21.0/usage/locks/) |
+| **restic-lock-retry-after** |`integer` OR `duration` |`1m` |Time to wait before trying to get a lock on a restic repositoey - see [usage/locks/]({{% relref "/usage/locks/" %}}) |
+| **restic-stale-lock-age** |`integer` OR `duration` |`2h` |The age an unused lock on a restic repository must have at least before resiticprofile attempts to unlock - see [usage/locks/]({{% relref "/usage/locks/" %}}) |
 | **scheduler** |`string` | |Leave blank for the default scheduler or use "crond" to select cron on supported operating systems |
-| **send-timeout** |`integer` OR `duration` |`30s` |Timeout when sending messages to a webhook - see [configuration/http_hooks/](https://dev.resticprofile.pages.dev/v0.21.0/configuration/http_hooks/). **Examples**: `15s`, `30s`, `2m30s`  |
+| **send-timeout** |`integer` OR `duration` |`30s` |Timeout when sending messages to a webhook - see [configuration/http_hooks/]({{% relref "/configuration/http_hooks/" %}}). **Examples**: `15s`, `30s`, `2m30s`  |
 | **shell** |one or more `strings` |`auto` |The shell that is used to run commands (default is OS specific). **Examples**: `sh`, `bash`, `pwsh`, `powershell`, `cmd`  |
-| **systemd-timer-template** |`string` | |File containing the go template to generate a systemd timer - see [schedules/systemd/](https://dev.resticprofile.pages.dev/v0.21.0/schedules/systemd/) |
-| **systemd-unit-template** |`string` | |File containing the go template to generate a systemd unit - see [schedules/systemd/](https://dev.resticprofile.pages.dev/v0.21.0/schedules/systemd/) |
+| **systemd-timer-template** |`string` | |File containing the go template to generate a systemd timer - see [schedules/systemd/]({{% relref "/schedules/systemd/" %}}) |
+| **systemd-unit-template** |`string` | |File containing the go template to generate a systemd unit - see [schedules/systemd/]({{% relref "/schedules/systemd/" %}}) |
 
 
 
@@ -97,7 +97,7 @@ In config file format v1, the name of this section is the name of your profile
 (excluding reserved names like `global`, `groups`, `includes` & `version`).
 
 From config file format v2, profile sections are declared as named configuration
-structure below section `profiles` (see [Configuration v2](https://dev.resticprofile.pages.dev/v0.21.0/configuration/v2/)
+structure below section `profiles` (see [Configuration v2]({{% relref "/configuration/v2/" %}})
 for details).
 
 #### Section **profile**
@@ -177,10 +177,10 @@ given as the arguments.
 | **run-before** |one or more `strings` | |Run shell command(s) before a restic command |
 | **run-finally** |one or more `strings` | |Run shell command(s) always, after all other commands |
 | **schedule** |one or more `strings` | |Set the times at which the scheduled command is run (times are specified in systemd timer format). **Examples**: `hourly`, `daily`, `weekly`, `monthly`, `10:00,14:00,18:00,22:00`, `Wed,Fri 17:48`, `*-*-15 02:45`, `Mon..Fri 00:30`  |
-| **schedule-lock-mode** |`string` |`default` |Specify how locks are used when running on schedule - see [schedules/configuration/](https://dev.resticprofile.pages.dev/v0.21.0/schedules/configuration/). Is one of `default`, `fail`, `ignore`  |
+| **schedule-lock-mode** |`string` |`default` |Specify how locks are used when running on schedule - see [schedules/configuration/]({{% relref "/schedules/configuration/" %}}). Is one of `default`, `fail`, `ignore`  |
 | **schedule-lock-wait** |`integer` OR `duration` | |Set the maximum time to wait for acquiring locks when running on schedule. **Examples**: `150s`, `15m`, `30m`, `45m`, `1h`, `2h30m`  |
 | **schedule-log** |`string` | |Redirect the output into a log file or to syslog when running on schedule. **Examples**: `/resticprofile.log`, `tcp://localhost:514`  |
-| **schedule-permission** |`string` |`auto` |Specify whether the schedule runs with system or user privileges - see [schedules/configuration/](https://dev.resticprofile.pages.dev/v0.21.0/schedules/configuration/). Is one of `auto`, `system`, `user`, `user_logged_on`  |
+| **schedule-permission** |`string` |`auto` |Specify whether the schedule runs with system or user privileges - see [schedules/configuration/]({{% relref "/schedules/configuration/" %}}). Is one of `auto`, `system`, `user`, `user_logged_on`  |
 | **schedule-priority** |`string` |`background` |Set the priority at which the schedule is run. Is one of `background`, `standard`  |
 | **send-after** | one or more nested *[SendMonitoringSection](#nested-sendmonitoringsection)* | |Send HTTP request(s) after a successful restic command |
 | **send-after-fail** | one or more nested *[SendMonitoringSection](#nested-sendmonitoringsection)* | |Send HTTP request(s) after failed restic or shell commands |
@@ -299,10 +299,10 @@ repository and not use a local cache.
 | Name              | Type                    | Default  | Notes |
 |:------------------|:------------------------|:---------|:------|
 | **schedule** |one or more `strings` | |Set the times at which the scheduled command is run (times are specified in systemd timer format). **Examples**: `hourly`, `daily`, `weekly`, `monthly`, `10:00,14:00,18:00,22:00`, `Wed,Fri 17:48`, `*-*-15 02:45`, `Mon..Fri 00:30`  |
-| **schedule-lock-mode** |`string` |`default` |Specify how locks are used when running on schedule - see [schedules/configuration/](https://dev.resticprofile.pages.dev/v0.21.0/schedules/configuration/). Is one of `default`, `fail`, `ignore`  |
+| **schedule-lock-mode** |`string` |`default` |Specify how locks are used when running on schedule - see [schedules/configuration/]({{% relref "/schedules/configuration/" %}}). Is one of `default`, `fail`, `ignore`  |
 | **schedule-lock-wait** |`integer` OR `duration` | |Set the maximum time to wait for acquiring locks when running on schedule. **Examples**: `150s`, `15m`, `30m`, `45m`, `1h`, `2h30m`  |
 | **schedule-log** |`string` | |Redirect the output into a log file or to syslog when running on schedule. **Examples**: `/resticprofile.log`, `tcp://localhost:514`  |
-| **schedule-permission** |`string` |`auto` |Specify whether the schedule runs with system or user privileges - see [schedules/configuration/](https://dev.resticprofile.pages.dev/v0.21.0/schedules/configuration/). Is one of `auto`, `system`, `user`, `user_logged_on`  |
+| **schedule-permission** |`string` |`auto` |Specify whether the schedule runs with system or user privileges - see [schedules/configuration/]({{% relref "/schedules/configuration/" %}}). Is one of `auto`, `system`, `user`, `user_logged_on`  |
 | **schedule-priority** |`string` |`background` |Set the priority at which the schedule is run. Is one of `background`, `standard`  |
 | **send-after** | one or more nested *[SendMonitoringSection](#nested-sendmonitoringsection)* | |Send HTTP request(s) after a successful restic command |
 | **send-after-fail** | one or more nested *[SendMonitoringSection](#nested-sendmonitoringsection)* | |Send HTTP request(s) after failed restic or shell commands |
@@ -361,10 +361,10 @@ new destination repository using the "init" command.
 | **run-before** |one or more `strings` | |Run shell command(s) before a restic command |
 | **run-finally** |one or more `strings` | |Run shell command(s) always, after all other commands |
 | **schedule** |one or more `strings` | |Set the times at which the scheduled command is run (times are specified in systemd timer format). **Examples**: `hourly`, `daily`, `weekly`, `monthly`, `10:00,14:00,18:00,22:00`, `Wed,Fri 17:48`, `*-*-15 02:45`, `Mon..Fri 00:30`  |
-| **schedule-lock-mode** |`string` |`default` |Specify how locks are used when running on schedule - see [schedules/configuration/](https://dev.resticprofile.pages.dev/v0.21.0/schedules/configuration/). Is one of `default`, `fail`, `ignore`  |
+| **schedule-lock-mode** |`string` |`default` |Specify how locks are used when running on schedule - see [schedules/configuration/]({{% relref "/schedules/configuration/" %}}). Is one of `default`, `fail`, `ignore`  |
 | **schedule-lock-wait** |`integer` OR `duration` | |Set the maximum time to wait for acquiring locks when running on schedule. **Examples**: `150s`, `15m`, `30m`, `45m`, `1h`, `2h30m`  |
 | **schedule-log** |`string` | |Redirect the output into a log file or to syslog when running on schedule. **Examples**: `/resticprofile.log`, `tcp://localhost:514`  |
-| **schedule-permission** |`string` |`auto` |Specify whether the schedule runs with system or user privileges - see [schedules/configuration/](https://dev.resticprofile.pages.dev/v0.21.0/schedules/configuration/). Is one of `auto`, `system`, `user`, `user_logged_on`  |
+| **schedule-permission** |`string` |`auto` |Specify whether the schedule runs with system or user privileges - see [schedules/configuration/]({{% relref "/schedules/configuration/" %}}). Is one of `auto`, `system`, `user`, `user_logged_on`  |
 | **schedule-priority** |`string` |`background` |Set the priority at which the schedule is run. Is one of `background`, `standard`  |
 | **send-after** | one or more nested *[SendMonitoringSection](#nested-sendmonitoringsection)* | |Send HTTP request(s) after a successful restic command |
 | **send-after-fail** | one or more nested *[SendMonitoringSection](#nested-sendmonitoringsection)* | |Send HTTP request(s) after failed restic or shell commands |
@@ -538,10 +538,10 @@ security considerations.
 | Name              | Type                    | Default  | Notes |
 |:------------------|:------------------------|:---------|:------|
 | **schedule** |one or more `strings` | |Set the times at which the scheduled command is run (times are specified in systemd timer format). **Examples**: `hourly`, `daily`, `weekly`, `monthly`, `10:00,14:00,18:00,22:00`, `Wed,Fri 17:48`, `*-*-15 02:45`, `Mon..Fri 00:30`  |
-| **schedule-lock-mode** |`string` |`default` |Specify how locks are used when running on schedule - see [schedules/configuration/](https://dev.resticprofile.pages.dev/v0.21.0/schedules/configuration/). Is one of `default`, `fail`, `ignore`  |
+| **schedule-lock-mode** |`string` |`default` |Specify how locks are used when running on schedule - see [schedules/configuration/]({{% relref "/schedules/configuration/" %}}). Is one of `default`, `fail`, `ignore`  |
 | **schedule-lock-wait** |`integer` OR `duration` | |Set the maximum time to wait for acquiring locks when running on schedule. **Examples**: `150s`, `15m`, `30m`, `45m`, `1h`, `2h30m`  |
 | **schedule-log** |`string` | |Redirect the output into a log file or to syslog when running on schedule. **Examples**: `/resticprofile.log`, `tcp://localhost:514`  |
-| **schedule-permission** |`string` |`auto` |Specify whether the schedule runs with system or user privileges - see [schedules/configuration/](https://dev.resticprofile.pages.dev/v0.21.0/schedules/configuration/). Is one of `auto`, `system`, `user`, `user_logged_on`  |
+| **schedule-permission** |`string` |`auto` |Specify whether the schedule runs with system or user privileges - see [schedules/configuration/]({{% relref "/schedules/configuration/" %}}). Is one of `auto`, `system`, `user`, `user_logged_on`  |
 | **schedule-priority** |`string` |`background` |Set the priority at which the schedule is run. Is one of `background`, `standard`  |
 | **send-after** | one or more nested *[SendMonitoringSection](#nested-sendmonitoringsection)* | |Send HTTP request(s) after a successful restic command |
 | **send-after-fail** | one or more nested *[SendMonitoringSection](#nested-sendmonitoringsection)* | |Send HTTP request(s) after failed restic or shell commands |
@@ -838,10 +838,10 @@ referenced and therefore not needed any more.
 | Name              | Type                    | Default  | Notes |
 |:------------------|:------------------------|:---------|:------|
 | **schedule** |one or more `strings` | |Set the times at which the scheduled command is run (times are specified in systemd timer format). **Examples**: `hourly`, `daily`, `weekly`, `monthly`, `10:00,14:00,18:00,22:00`, `Wed,Fri 17:48`, `*-*-15 02:45`, `Mon..Fri 00:30`  |
-| **schedule-lock-mode** |`string` |`default` |Specify how locks are used when running on schedule - see [schedules/configuration/](https://dev.resticprofile.pages.dev/v0.21.0/schedules/configuration/). Is one of `default`, `fail`, `ignore`  |
+| **schedule-lock-mode** |`string` |`default` |Specify how locks are used when running on schedule - see [schedules/configuration/]({{% relref "/schedules/configuration/" %}}). Is one of `default`, `fail`, `ignore`  |
 | **schedule-lock-wait** |`integer` OR `duration` | |Set the maximum time to wait for acquiring locks when running on schedule. **Examples**: `150s`, `15m`, `30m`, `45m`, `1h`, `2h30m`  |
 | **schedule-log** |`string` | |Redirect the output into a log file or to syslog when running on schedule. **Examples**: `/resticprofile.log`, `tcp://localhost:514`  |
-| **schedule-permission** |`string` |`auto` |Specify whether the schedule runs with system or user privileges - see [schedules/configuration/](https://dev.resticprofile.pages.dev/v0.21.0/schedules/configuration/). Is one of `auto`, `system`, `user`, `user_logged_on`  |
+| **schedule-permission** |`string` |`auto` |Specify whether the schedule runs with system or user privileges - see [schedules/configuration/]({{% relref "/schedules/configuration/" %}}). Is one of `auto`, `system`, `user`, `user_logged_on`  |
 | **schedule-priority** |`string` |`background` |Set the priority at which the schedule is run. Is one of `background`, `standard`  |
 | **send-after** | one or more nested *[SendMonitoringSection](#nested-sendmonitoringsection)* | |Send HTTP request(s) after a successful restic command |
 | **send-after-fail** | one or more nested *[SendMonitoringSection](#nested-sendmonitoringsection)* | |Send HTTP request(s) after failed restic or shell commands |
@@ -990,10 +990,10 @@ security considerations.
 | **after-backup** |`true` / `false` |`false` |Apply retention after the backup command succeeded |
 | **before-backup** |`true` / `false` |`false` |Apply retention before starting the backup command |
 | ~~schedule~~ |one or more `strings` | |Set the times at which the scheduled command is run (times are specified in systemd timer format). **Examples**: `hourly`, `daily`, `weekly`, `monthly`, `10:00,14:00,18:00,22:00`, `Wed,Fri 17:48`, `*-*-15 02:45`, `Mon..Fri 00:30`  |
-| ~~schedule-lock-mode~~ |`string` |`default` |Specify how locks are used when running on schedule - see [schedules/configuration/](https://dev.resticprofile.pages.dev/v0.21.0/schedules/configuration/). Is one of `default`, `fail`, `ignore`  |
+| ~~schedule-lock-mode~~ |`string` |`default` |Specify how locks are used when running on schedule - see [schedules/configuration/]({{% relref "/schedules/configuration/" %}}). Is one of `default`, `fail`, `ignore`  |
 | ~~schedule-lock-wait~~ |`integer` OR `duration` | |Set the maximum time to wait for acquiring locks when running on schedule. **Examples**: `150s`, `15m`, `30m`, `45m`, `1h`, `2h30m`  |
 | ~~schedule-log~~ |`string` | |Redirect the output into a log file or to syslog when running on schedule. **Examples**: `/resticprofile.log`, `tcp://localhost:514`  |
-| ~~schedule-permission~~ |`string` |`auto` |Specify whether the schedule runs with system or user privileges - see [schedules/configuration/](https://dev.resticprofile.pages.dev/v0.21.0/schedules/configuration/). Is one of `auto`, `system`, `user`, `user_logged_on`  |
+| ~~schedule-permission~~ |`string` |`auto` |Specify whether the schedule runs with system or user privileges - see [schedules/configuration/]({{% relref "/schedules/configuration/" %}}). Is one of `auto`, `system`, `user`, `user_logged_on`  |
 | ~~schedule-priority~~ |`string` |`background` |Set the priority at which the schedule is run. Is one of `background`, `standard`  |
 
 
@@ -1251,7 +1251,7 @@ can be overridden in this section.
 ### Nested profile sections
 
 Nested sections describe configuration structure that is assigned to flags within the
-configuration, see [HTTP Hooks](https://dev.resticprofile.pages.dev/v0.21.0/configuration/http_hooks/) as an example.
+configuration, see [HTTP Hooks]({{% relref "/configuration/http_hooks/" %}}) as an example.
 
 #### Nested *SendMonitoringHeader*
 
@@ -1270,7 +1270,7 @@ configuration, see [HTTP Hooks](https://dev.resticprofile.pages.dev/v0.21.0/conf
 | Name              | Type                    | Default  | Notes |
 |:------------------|:------------------------|:---------|:------|
 | **body** |`string` | |Request body, overrides "body-template" |
-| **body-template** |`string` | |Path to a file containing the request body (go template). See [configuration/http_hooks/#body-template](https://dev.resticprofile.pages.dev/v0.21.0/configuration/http_hooks/#body-template) |
+| **body-template** |`string` | |Path to a file containing the request body (go template). See [configuration/http_hooks/#body-template]({{% relref "/configuration/http_hooks/#body-template" %}}) |
 | **headers** | one or more nested *[SendMonitoringHeader](#nested-sendmonitoringheader)* | |Additional HTTP headers to send with the request |
 | **method** |`string` |`GET` |HTTP method of the request. Is one of `GET`, `DELETE`, `HEAD`, `OPTIONS`, `PATCH`, `POST`, `PUT`, `TRACE`  |
 | **skip-tls-verification** |`true` / `false` |`false` |Enables insecure TLS (without verification), see also "global.ca-certificates" |
@@ -1297,7 +1297,7 @@ Config file format v1 uses a simplified groups section. Every named item below `
 maps to one or more `profile` names (list of strings).
 
 From file format v2, every named item in the groups section is configuration structure
-following the format described below (see [Configuration v2](https://dev.resticprofile.pages.dev/v0.21.0/configuration/v2/)
+following the format described below (see [Configuration v2]({{% relref "/configuration/v2/" %}})
 for details):
 
 | Name              | Type                    | Default  | Notes |
@@ -1352,12 +1352,12 @@ in `[type]`.
 
 resticprofile provides a JSON schema for v1 & v2 configuration files. The schema may be
 used to validate configuration files in JSON format (and possibly others), see
-[JSON schema](https://dev.resticprofile.pages.dev/v0.21.0/configuration/jsonschema/) for details.
+[JSON schema]({{% relref "/configuration/jsonschema/" %}}) for details.
 
 JSON schema URLs for **any** *restic* version:
 
-* Config V1: https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-1.json
-* Config V2: https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-2.json
+* Config V1: https://creativeprojects.github.io/resticprofile/jsonschema/config-1.json
+* Config V2: https://creativeprojects.github.io/resticprofile/jsonschema/config-2.json
 
 JSON schema URLs for a specific *restic* version:
 
@@ -1366,18 +1366,18 @@ JSON schema URLs for a specific *restic* version:
 
 Available URLs:
 
-  * https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-2-restic-0-15-0.json
-  * https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-1-restic-0-15-0.json
-  * https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-2-restic-0-14-0.json
-  * https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-1-restic-0-14-0.json
-  * https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-2-restic-0-13-0.json
-  * https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-1-restic-0-13-0.json
-  * https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-2-restic-0-12-0.json
-  * https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-1-restic-0-12-0.json
-  * https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-2-restic-0-11-0.json
-  * https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-1-restic-0-11-0.json
-  * https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-2-restic-0-10-0.json
-  * https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-1-restic-0-10-0.json
-  * https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-2-restic-0-9.json
-  * https://dev.resticprofile.pages.dev/v0.21.0/jsonschema/config-1-restic-0-9.json
+  * https://creativeprojects.github.io/resticprofile/jsonschema/config-2-restic-0-15-0.json
+  * https://creativeprojects.github.io/resticprofile/jsonschema/config-1-restic-0-15-0.json
+  * https://creativeprojects.github.io/resticprofile/jsonschema/config-2-restic-0-14-0.json
+  * https://creativeprojects.github.io/resticprofile/jsonschema/config-1-restic-0-14-0.json
+  * https://creativeprojects.github.io/resticprofile/jsonschema/config-2-restic-0-13-0.json
+  * https://creativeprojects.github.io/resticprofile/jsonschema/config-1-restic-0-13-0.json
+  * https://creativeprojects.github.io/resticprofile/jsonschema/config-2-restic-0-12-0.json
+  * https://creativeprojects.github.io/resticprofile/jsonschema/config-1-restic-0-12-0.json
+  * https://creativeprojects.github.io/resticprofile/jsonschema/config-2-restic-0-11-0.json
+  * https://creativeprojects.github.io/resticprofile/jsonschema/config-1-restic-0-11-0.json
+  * https://creativeprojects.github.io/resticprofile/jsonschema/config-2-restic-0-10-0.json
+  * https://creativeprojects.github.io/resticprofile/jsonschema/config-1-restic-0-10-0.json
+  * https://creativeprojects.github.io/resticprofile/jsonschema/config-2-restic-0-9.json
+  * https://creativeprojects.github.io/resticprofile/jsonschema/config-1-restic-0-9.json
 

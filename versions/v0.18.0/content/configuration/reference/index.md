@@ -22,7 +22,7 @@ None of these flags are passed on the restic command line
 * **restic-binary**: string
 * **restic-lock-retry-after**: duration
 * **restic-stale-lock-age**: duration
-* **min-memory**: integer (MB) - see [memory]({{% ref "/usage/memory" %}})
+* **min-memory**: integer (MB) - see [memory]({{% relref "/usage/memory" %}})
 * **shell**: string (shell binary to run commands, default value is OS specific)
 * **scheduler**: string (`crond` is the only non-default value)
 * **systemd-unit-template**: string (file containing a go template to generate systemd unit file)

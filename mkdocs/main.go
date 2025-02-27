@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"os"
+	"path/filepath"
 
 	"github.com/creativeprojects/clog"
 )
@@ -22,6 +23,14 @@ func main() {
 	switch flag.Arg(0) {
 	case "snapshot":
 		err = createSnapshots()
+
+	case "cleanup":
+		path := versionsPathPrefix
+		version := flag.Arg(1)
+		if version != "" {
+			path = filepath.Join(versionsPathPrefix, version)
+		}
+		err = cleanupDocs(path)
 
 	case "theme":
 		err = prepareTheme()

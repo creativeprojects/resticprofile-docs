@@ -22,23 +22,19 @@ const (
 )
 
 var (
-	removeHeaders     = []string{"date", "tags"}
-	domainReplacement = []string{
-		"https://creativeprojects.github.io/resticprofile",
-		"https://dev.resticprofile.pages.dev/%s",
-	}
-	simpleReplacements = [][]string{
-		{"tabs groupId=", "tabs groupid="},
-		{"tab name=", "tab title="},
-		{" vebose ", " verbose "},
-	}
-	regexpReplacements = [][]string{
-		{`{{<\s*ref\s+"([^"]*)"\s*>}}`, `{{% ref "$1" %}}`},
-		{`{{%(\s*)attachments\s+`, `{{%${1}resources `},
+	removeHeaders = []string{"date", "tags"}
+	replacements  = []Replacement{
+		{Simple, "tabs groupId=", "tabs groupid="},
+		{Simple, "tab name=", "tab title="},
+		{Simple, " vebose ", " verbose "},
+		{Regexp, `{{<\s*ref\s+"([^"]*)"\s*>}}`, `{{% ref "$1" %}}`},
+		{Regexp, `{{%(\s*)attachments\s+`, `{{%${1}resources `},
+		{Simple, "% ref \"", "% relref \""},
+		{Regexp, `\(https:\/\/creativeprojects\.github\.io\/resticprofile([^\)]*)\)`, `({{% relref "$1" %}})`},
 	}
 )
 
-func cleanupDocs(root, version string) error {
+func cleanupDocs(root string) error {
 	if root == "" {
 		return errors.New("please specify a path of file(s) to cleanup")
 	}
@@ -49,7 +45,7 @@ func cleanupDocs(root, version string) error {
 	}
 	if !finfo.IsDir() {
 		if filepath.Ext(root) == fileExt {
-			return cleanupMD(root, version)
+			return cleanupMD(root)
 		}
 		return fmt.Errorf("not a directory: %q", root)
 	}
@@ -64,7 +60,7 @@ func cleanupDocs(root, version string) error {
 			return nil
 		}
 		clog.Debugf("cleaning up %q", path)
-		err = cleanupMD(path, version)
+		err = cleanupMD(path)
 		if err != nil {
 			clog.Warning("cleaning up %q: %s", path, err)
 		}
@@ -72,7 +68,7 @@ func cleanupDocs(root, version string) error {
 	})
 }
 
-func cleanupMD(path, version string) error {
+func cleanupMD(path string) error {
 	content, err := os.ReadFile(path)
 	if err != nil {
 		return err
@@ -136,7 +132,7 @@ func cleanupMD(path, version string) error {
 		lineNum = 0
 	}
 
-	remainingLines, contentChanged := cleanContent(lines[lineNum:], version)
+	remainingLines, contentChanged := cleanContent(lines[lineNum:])
 	if headerChanged || contentChanged {
 		clog.Debugf("rewrite needed: %+v\n", header)
 		return rewriteMD(path, header, remainingLines)
@@ -189,37 +185,30 @@ func writeLine(w io.Writer, content []byte) error {
 	return err
 }
 
-func cleanContent(lines [][]byte, version string) ([][]byte, bool) {
+func cleanContent(lines [][]byte) ([][]byte, bool) {
 	changed := false
 	output := make([][]byte, len(lines))
 	for i, line := range lines {
+		for _, replacement := range replacements {
+			switch replacement.Type {
+			case Simple:
+				if bytes.Contains(line, []byte(replacement.From)) {
+					changed = true
+					line = bytes.ReplaceAll(
+						line,
+						[]byte(replacement.From),
+						[]byte(replacement.To),
+					)
+				}
 
-		if bytes.Contains(line, []byte(domainReplacement[0])) {
-			changed = true
-			line = bytes.ReplaceAll(
-				line,
-				[]byte(domainReplacement[0]),
-				[]byte(fmt.Sprintf(domainReplacement[1], version)),
-			)
-		}
-
-		for _, replacement := range simpleReplacements {
-			if bytes.Contains(line, []byte(replacement[0])) {
-				changed = true
-				line = bytes.ReplaceAll(
-					line,
-					[]byte(replacement[0]),
-					[]byte(replacement[1]),
-				)
-			}
-		}
-		for _, replacement := range regexpReplacements {
-			pattern := regexp.MustCompile(replacement[0])
-			if pattern.Find(line) != nil {
-				changed = true
-				line = pattern.ReplaceAll(
-					line,
-					[]byte(replacement[1]))
+			case Regexp:
+				pattern := regexp.MustCompile(replacement.From)
+				if pattern.Find(line) != nil {
+					changed = true
+					line = pattern.ReplaceAll(
+						line,
+						[]byte(replacement.To))
+				}
 			}
 		}
 		output[i] = line

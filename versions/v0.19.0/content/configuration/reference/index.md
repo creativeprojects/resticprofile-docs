@@ -25,16 +25,16 @@ None of these flags are directly passed on to the restic command line
 | **default-command** | string | `snapshots` |
 | **initialize** | true / false | false | auto-initialize a repository |
 | **restic-binary** | string | | full path of the restic program |
-| **restic-lock-retry-after** | duration [^duration] | 1 minute | see [locks]({{% ref "/usage/locks" %}}) |
-| **restic-stale-lock-age** | duration [^duration] | 2 hours | see [locks]({{% ref "/usage/locks" %}}) |
-| **min-memory** | integer (MB) | 100MB | see [memory]({{% ref "/usage/memory" %}}) |
+| **restic-lock-retry-after** | duration [^duration] | 1 minute | see [locks]({{% relref "/usage/locks" %}}) |
+| **restic-stale-lock-age** | duration [^duration] | 2 hours | see [locks]({{% relref "/usage/locks" %}}) |
+| **min-memory** | integer (MB) | 100MB | see [memory]({{% relref "/usage/memory" %}}) |
 | **shell** | string | OS specific | shell binary to run commands |
 | **scheduler** | string | | `crond` is the only non-default value |
-| **systemd-unit-template** | string | | file containing a go template to generate systemd unit file - see [systemd templates]({{% ref "/schedules/systemd" %}}) |
-| **systemd-timer-template** | string | | file containing a go template to generate systemd timer file - see [systemd templates]({{% ref "/schedules/systemd" %}}) |
-| **send-timeout** | duration [^duration] | 30 seconds | timeout when sending messages to a webhook - see [HTTP Hooks]({{% ref "http_hooks" %}}) |
-| **ca-certificates** | string, or list of strings | | certificates (file in PEM format) to authenticate HTTP servers - see [HTTP Hooks]({{% ref "http_hooks" %}}) |
-| **prevent-sleep** | true / false | false | prevent the system from sleeping - see [Preventing system sleep]({{% ref "sleep" %}}) |
+| **systemd-unit-template** | string | | file containing a go template to generate systemd unit file - see [systemd templates]({{% relref "/schedules/systemd" %}}) |
+| **systemd-timer-template** | string | | file containing a go template to generate systemd timer file - see [systemd templates]({{% relref "/schedules/systemd" %}}) |
+| **send-timeout** | duration [^duration] | 30 seconds | timeout when sending messages to a webhook - see [HTTP Hooks]({{% relref "http_hooks" %}}) |
+| **ca-certificates** | string, or list of strings | | certificates (file in PEM format) to authenticate HTTP servers - see [HTTP Hooks]({{% relref "http_hooks" %}}) |
+| **prevent-sleep** | true / false | false | prevent the system from sleeping - see [Preventing system sleep]({{% relref "sleep" %}}) |
 | **group-continue-on-error** | true / false | false | if set to `true` it allows the next profile(s) to run after a failure |
 
 ### Profile sections
