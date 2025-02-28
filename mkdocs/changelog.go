@@ -86,6 +86,9 @@ func cleanBody(input string) string {
 		}
 		if changelog {
 			line = changelogPattern.ReplaceAllString(line, "* [$2](https://github.com/creativeprojects/resticprofile/commit/$2) ")
+		} else {
+			// remove links to old documentation
+			line = regexp.MustCompile(`\[(.*?)\]\(https://github\.com/creativeprojects/resticprofile/tree.*?\)`).ReplaceAllString(line, "$1")
 		}
 		_, _ = output.WriteString(line)
 		_ = output.WriteByte('\n')

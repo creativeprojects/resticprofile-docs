@@ -16,7 +16,7 @@ const (
 	pageVersionsClosingShortcode = " >}}"
 )
 
-func createOtherVersions() error {
+func createPageOtherVersions() error {
 	pagesPerVersion := make(map[string][]string)
 	versions, err := getVersions(versionsPathPrefix)
 	if err != nil {

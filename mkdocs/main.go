@@ -32,8 +32,8 @@ func main() {
 		}
 		err = cleanupDocs(path)
 
-	case "otherversions":
-		err = createOtherVersions()
+	case "pageversions":
+		err = createPageOtherVersions()
 
 	case "theme":
 		err = prepareTheme()
