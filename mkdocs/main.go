@@ -32,6 +32,9 @@ func main() {
 		}
 		err = cleanupDocs(path)
 
+	case "otherversions":
+		err = createOtherVersions()
+
 	case "theme":
 		err = prepareTheme()
 
@@ -45,6 +48,9 @@ func main() {
 			os.Exit(1)
 		}
 		err = serveDocVersion(version)
+
+	case "changelog":
+		err = createReleaseNotes()
 
 	default:
 		clog.Info("please specify any of the commands: [snapshot, cleanup or generate]")

@@ -4,7 +4,20 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/creativeprojects/clog"
 )
+
+func createOtherVersions() error {
+	versions, err := getVersions(versionsPathPrefix)
+	if err != nil {
+		return err
+	}
+	for _, version := range versions {
+		clog.Infof("processing version %s", version)
+	}
+	return nil
+}
 
 func getVersions(from string) ([]string, error) {
 	entries, err := os.ReadDir(from)
@@ -18,4 +31,8 @@ func getVersions(from string) ([]string, error) {
 		}
 	}
 	return versions, nil
+}
+
+func parseVersion(path, version string) error {
+	return nil
 }
