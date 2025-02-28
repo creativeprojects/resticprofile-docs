@@ -5,6 +5,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 
 	"github.com/creativeprojects/clog"
@@ -33,11 +34,10 @@ func createOtherVersions() error {
 	}
 	// add tag on each page for each version
 	for version, pages := range pagesPerVersion {
-		otherVersions := otherVersions(versions, version)
 		for _, page := range pages {
 			path := findPagePath(version, page)
 			clog.Debugf("adding tag to %s", path)
-			err := addOtherVersionsTag(path, otherVersions)
+			err := addOtherVersionsTag(path, otherVersions(pagesPerVersion, page, version))
 			if err != nil {
 				return fmt.Errorf("cannot add tag to %s: %w", path, err)
 			}
@@ -145,15 +145,23 @@ func addOtherVersionsTag(path string, versions []string) error {
 }
 
 func buildTag(versions []string) string {
+	if len(versions) == 0 {
+		return ""
+	}
 	return fmt.Sprintf(`%s"%s"%s`, pageVersionsOpeningShortcode, strings.Join(versions, `" "`), pageVersionsClosingShortcode)
 }
 
-func otherVersions(versions []string, version string) []string {
-	other := make([]string, 0, len(versions)-1)
-	for _, v := range versions {
-		if v != version {
-			other = append(other, v)
+func otherVersions(pagesPerVersion map[string][]string, page, currentVersion string) []string {
+	other := make([]string, 0, len(pagesPerVersion[currentVersion])-1)
+	for version, pages := range pagesPerVersion {
+		if currentVersion == version {
+			continue
+		}
+		if slices.Contains(pages, page) {
+			other = append(other, version)
 		}
 	}
+	// keys coming from map are not sorted
+	slices.Sort(other)
 	return other
 }
