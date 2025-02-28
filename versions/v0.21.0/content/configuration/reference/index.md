@@ -380,7 +380,7 @@ new destination repository using the "init" command.
 | **from-key-hint** |`string` |`""` |key ID of key to try decrypting the source repository first (default: $RESTIC_FROM_KEY_HINT). `restic >= 0.14.0`  |
 | **from-password-command** |`string` |`""` |shell command to obtain the source repository password from (default: $RESTIC_FROM_PASSWORD_COMMAND). `restic >= 0.14.0`  |
 | **from-password-file** |`string` |`""` |file to read the source repository password from (default: $RESTIC_FROM_PASSWORD_FILE). `restic >= 0.14.0`  |
-| **from-repo** |`string` |`""` |source repository to copy snapshots from (default: $RESTIC_FROM_REPOSITORY). `restic >= 0.14.0`  |
+| **from-repository** |`string` |`""` |source repository to copy snapshots from (default: $RESTIC_FROM_REPOSITORY). `restic >= 0.14.0`  |
 | **from-repository-file** |`string` |`""` |file from which to read the source repository location to copy snapshots from (default: $RESTIC_FROM_REPOSITORY_FILE). `restic >= 0.14.0`  |
 | **host** |`true` / `false` OR one or more `hostnames` | |only consider snapshots for this host. Boolean true is replaced with the hostname of the system. **Examples**: `true`, `false`, `"host"` . `restic >= 0.10.0`  |
 | ~~key-hint2~~ |`string` |`""` |key ID of key to try decrypting the destination repository first (default: $RESTIC_KEY_HINT2). `restic >= 0.10.0 < 0.14.0`  |
@@ -1381,3 +1381,4 @@ Available URLs:
   * https://creativeprojects.github.io/resticprofile/jsonschema/config-2-restic-0-9.json
   * https://creativeprojects.github.io/resticprofile/jsonschema/config-1-restic-0-9.json
 
+{{< pageversions "v0.18.0" "v0.19.0" "v0.20.0" >}}

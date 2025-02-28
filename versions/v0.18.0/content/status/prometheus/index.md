@@ -218,3 +218,4 @@ which will add the `host` label to all your metrics.
 
 
 
+{{< pageversions "v0.19.0" "v0.20.0" "v0.21.0" >}}

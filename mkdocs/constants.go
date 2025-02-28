@@ -2,6 +2,7 @@ package main
 
 const (
 	versionsPathPrefix   = "./versions"
+	contentDirectory     = "content"
 	sourceRepositoryPath = "./source"
 	themeRepositoryPath  = "./themes/hugo-theme-relearn"
 	sourceRepositoryURL  = "https://github.com/creativeprojects/resticprofile.git"

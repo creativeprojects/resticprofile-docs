@@ -247,3 +247,4 @@ global:
 
 If restic lock management is not desired, it can be disabled by setting both values to **0**.
 
+{{< pageversions "v0.18.0" "v0.20.0" "v0.21.0" >}}

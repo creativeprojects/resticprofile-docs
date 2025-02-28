@@ -18,3 +18,4 @@ I have created a [contributions section](https://github.com/creativeprojects/res
 - [get backup status information in zabbix](https://github.com/creativeprojects/resticprofile/tree/master/contrib/zabbix)
 - [scheduling inside a docker container](https://github.com/creativeprojects/resticprofile/tree/master/contrib/schedule-in-docker)
 
+{{< pageversions "v0.18.0" "v0.19.0" "v0.20.0" >}}

@@ -43,3 +43,4 @@ arch: linux_armv7
 
 Note: _I might find a way to detect this automatically at some point_
 
+{{< pageversions "v0.19.0" "v0.20.0" "v0.21.0" >}}

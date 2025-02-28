@@ -51,3 +51,4 @@ $ sudo ./install.sh -b /usr/local/bin
 
 It will install resticprofile in `/usr/local/bin/`
 
+{{< pageversions "v0.18.0" "v0.19.0" "v0.20.0" >}}

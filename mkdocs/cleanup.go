@@ -167,10 +167,13 @@ func rewriteMD(filename string, header map[string]any, lines [][]byte) error {
 		}
 	}
 
-	for _, line := range lines {
-		err = writeLine(file, line)
-		if err != nil {
-			return err
+	for i, line := range lines {
+		// don't write a newline at the end of the file
+		if len(line) > 0 || i < len(lines)-1 {
+			err = writeLine(file, line)
+			if err != nil {
+				return err
+			}
 		}
 	}
 	return nil

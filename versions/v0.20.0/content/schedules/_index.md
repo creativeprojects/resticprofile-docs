@@ -75,3 +75,4 @@ which mean you can schedule `backup`, `forget`, `prune`, `check` and `copy` inde
 starting from version 0.11.0 the schedule of the `retention` section is **deprecated**: Use the `forget` section instead.
 
 
+{{< pageversions "v0.18.0" "v0.19.0" "v0.21.0" >}}

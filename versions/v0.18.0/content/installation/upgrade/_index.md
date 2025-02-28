@@ -23,3 +23,4 @@ and since version 0.11.0:
 $ resticprofile self-update --quiet
 ```
 
+{{< pageversions "v0.19.0" "v0.20.0" "v0.21.0" >}}

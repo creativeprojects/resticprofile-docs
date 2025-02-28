@@ -40,3 +40,4 @@ The configuration file accepts various formats:
 * [HCL](https://github.com/hashicorp/hcl): configuration file with extension _.hcl_
 
 
+{{< pageversions "v0.18.0" "v0.20.0" "v0.21.0" >}}

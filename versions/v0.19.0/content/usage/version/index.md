@@ -8,3 +8,5 @@ The `version` command displays resticprofile version. If run in verbose mode (us
 ```shell
 $ resticprofile --verbose version
 ```
+
+{{< pageversions "v0.18.0" "v0.20.0" "v0.21.0" >}}

@@ -39,3 +39,5 @@ Remove all the schedules defined on the selected profile or profiles.
 Print the status on all the installed schedules of the selected profile or profiles. 
 
 The display of the `status` command will be OS dependant. Please see the examples below on which output you can expect from it.
+
+{{< pageversions "v0.19.0" "v0.20.0" "v0.21.0" >}}
