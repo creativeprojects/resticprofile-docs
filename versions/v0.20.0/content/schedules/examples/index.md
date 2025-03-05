@@ -350,4 +350,4 @@ If you prefer not being asked, you can add the `--no-start` flag like so:
 % resticprofile -v -c examples/private/azure.yaml -n self schedule --no-start
 ```
 
-{{< pageversions "v0.18.0" "v0.19.0" "v0.21.0" >}}
+{{< pageversions "v0.18.0" "v0.19.0" "v0.21.1" "v0.22.0" >}}

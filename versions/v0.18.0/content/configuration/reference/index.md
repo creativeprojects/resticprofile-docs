@@ -289,4 +289,4 @@ Flags passed to the restic command line
 * **tag**: true / false, string OR list of strings
 
 
-{{< pageversions "v0.19.0" "v0.20.0" "v0.21.0" >}}
+{{< pageversions "v0.19.0" "v0.20.0" "v0.21.1" "v0.22.0" >}}

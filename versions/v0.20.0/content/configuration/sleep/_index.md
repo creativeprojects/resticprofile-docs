@@ -14,4 +14,4 @@ Please note:
 - it will not prevent a sleep if the system is running on batteries
 - it will not prevent a sleep triggered by a user action: using the sleep button, closing the laptop lid, etc.
 
-{{< pageversions "v0.19.0" "v0.21.0" >}}
+{{< pageversions "v0.19.0" "v0.21.1" "v0.22.0" >}}

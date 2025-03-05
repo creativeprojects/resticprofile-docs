@@ -45,4 +45,4 @@ Starting from version `0.18.0`, the resticprofile docker image also includes [rc
 
 [1]: https://rclone.org/
 
-{{< pageversions "v0.18.0" "v0.20.0" "v0.21.0" >}}
+{{< pageversions "v0.18.0" "v0.20.0" "v0.21.1" "v0.22.0" >}}

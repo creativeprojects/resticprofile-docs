@@ -140,4 +140,4 @@ These are available for both the unit and timer templates:
 * Nice             *integer*
 * Environment      *array of strings*
 
-{{< pageversions "v0.18.0" "v0.19.0" "v0.21.0" >}}
+{{< pageversions "v0.18.0" "v0.19.0" "v0.21.1" "v0.22.0" >}}

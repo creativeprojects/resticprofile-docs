@@ -23,4 +23,4 @@ $ resticprofile generate --bash-completion > /etc/bash_completion.d/resticprofil
 $ chmod +x /etc/bash_completion.d/resticprofile
 ```
 
-{{< pageversions "v0.19.0" "v0.20.0" "v0.21.0" >}}
+{{< pageversions "v0.19.0" "v0.20.0" "v0.21.1" "v0.22.0" >}}

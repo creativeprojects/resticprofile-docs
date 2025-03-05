@@ -17,4 +17,4 @@ I have created a [contributions section](https://github.com/creativeprojects/res
 - [send email on systemd timer error](https://github.com/creativeprojects/resticprofile/tree/master/contrib/systemd)
 - [get backup status information in zabbix](https://github.com/creativeprojects/resticprofile/tree/master/contrib/zabbix)
 
-{{< pageversions "v0.19.0" "v0.20.0" "v0.21.0" >}}
+{{< pageversions "v0.19.0" "v0.20.0" "v0.21.1" "v0.22.0" >}}
