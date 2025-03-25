@@ -1,3 +1,5 @@
 /source
 /themes
 /versions/**/Makefile
+
+/docs/themes
