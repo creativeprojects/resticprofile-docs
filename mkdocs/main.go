@@ -1,17 +1,19 @@
 package main
 
 import (
-	"flag"
 	"os"
 	"path/filepath"
 
 	"github.com/creativeprojects/clog"
+	"github.com/spf13/pflag"
 )
 
 func main() {
 	var verbose bool
-	flag.BoolVar(&verbose, "v", false, "display more information")
-	flag.Parse()
+	var baseURL string
+	pflag.BoolVarP(&verbose, "verbose", "v", false, "display more information")
+	pflag.StringVar(&baseURL, "baseURL", "", "base URL (without version)")
+	pflag.Parse()
 
 	level := clog.LevelInfo
 	if verbose {
@@ -20,13 +22,13 @@ func main() {
 	clog.SetDefaultLogger(clog.NewFilteredConsoleLogger(level))
 
 	var err error
-	switch flag.Arg(0) {
+	switch pflag.Arg(0) {
 	case "snapshot":
 		err = createSnapshots()
 
 	case "cleanup":
 		path := versionsPathPrefix
-		version := flag.Arg(1)
+		version := pflag.Arg(1)
 		if version != "" {
 			path = filepath.Join(versionsPathPrefix, version)
 		}
@@ -42,7 +44,7 @@ func main() {
 		err = generateDocs()
 
 	case "serve":
-		version := flag.Arg(1)
+		version := pflag.Arg(1)
 		if version == "" {
 			clog.Errorf("missing version: mkdocs serve v0.21.0")
 			os.Exit(1)

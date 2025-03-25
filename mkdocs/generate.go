@@ -8,6 +8,7 @@ import (
 	"os/signal"
 	"path/filepath"
 	"syscall"
+	"text/template"
 
 	"github.com/creativeprojects/clog"
 )
@@ -82,6 +83,11 @@ func serveDocVersion(version string) error {
 	}
 	defer unlinkJsonSchema()
 
+	err = generateHugoConfig(version, versions)
+	if err != nil {
+		return err
+	}
+
 	cmd := exec.Command(
 		"hugo",
 		"serve",
@@ -122,4 +128,33 @@ func linkJsonSchema(version string) (func() error, error) {
 	return func() error {
 		return nil
 	}, nil
+}
+
+func generateHugoConfig(currentVersion string, otherVersions []string) error {
+	templ, err := template.ParseFiles(hugoConfigTemplate)
+	if err != nil {
+		return err
+	}
+	file, err := os.Create(hugoConfigFile)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	data := TemplateContext{
+		Current: TemplateVersion{
+			Version: currentVersion,
+		},
+		Versions: make([]TemplateVersion, len(versions)),
+	}
+	for i, otherVersion := range versions {
+		data.Versions[i] = TemplateVersion{
+			Version: otherVersion,
+		}
+	}
+	err = templ.Execute(file, data)
+	if err != nil {
+		return err
+	}
+	return nil
 }

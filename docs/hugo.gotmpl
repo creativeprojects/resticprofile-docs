@@ -20,6 +20,16 @@ publishdir = "../public/"
   externalLinkTarget = "_blank"
   ordersectionsby = "weight"
 
+  version = '{{ .Current.Version }}'
+
+  {{ range .Versions -}}[[params.versions]]
+    baseURL = 'https://creativeprojects.github.io/resticprofile/{{ .Version }}'
+    identifier = '{{ .Version }}'
+    isLatest = false
+    title = '{{ .Version }}'
+
+  {{ end -}}
+
 [[menu.shortcuts]]
   name = "<i class='fab fa-fw fa-github'></i> GitHub repo"
   identifier = "ds"
