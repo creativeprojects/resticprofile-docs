@@ -23,11 +23,6 @@ func generateDocs() error {
 		return fmt.Errorf("cannot load versions: %w", err)
 	}
 
-	err = linkContent()
-	if err != nil {
-		return err
-	}
-
 	for _, version := range versions {
 		clog.Debugf("generating version %s", version)
 		err = generateDocVersion(version)
@@ -36,25 +31,21 @@ func generateDocs() error {
 		}
 	}
 
-	return unlinkContent()
+	return nil
 }
 
 func generateDocVersion(version string) error {
-	err := os.Symlink(filepath.Join("../..", versionsPathPrefix, version, "content"), "./source/docs/content")
+	unlink, err := linkContent(version)
 	if err != nil {
-		return fmt.Errorf("cannot create symlink: %w", err)
+		return err
 	}
-	defer os.Remove("./source/docs/content")
+	defer unlink()
 
-	// this cannot be a symbolic link
-	jsonschemaSource := filepath.Join(versionsPathPrefix, version, "jsonschema")
-	if isDir(jsonschemaSource) {
-		err = copyFiles(jsonschemaSource, "./source/docs/static/jsonschema")
-		if err != nil {
-			return fmt.Errorf("cannot copy jsonschema files: %w", err)
-		}
-		defer os.RemoveAll("./source/docs/static/jsonschema")
+	unlinkJsonSchema, err := linkJsonSchema(version)
+	if err != nil {
+		return err
 	}
+	defer unlinkJsonSchema()
 
 	cmd := exec.Command(
 		"hugo",
@@ -63,9 +54,8 @@ func generateDocVersion(version string) error {
 		"--cleanDestinationDir",
 		"--destination", fmt.Sprintf("../public/%s", version),
 		"--baseURL", fmt.Sprintf("https://dev.resticprofile.pages.dev/%s", version),
-		"--themesDir", "../../themes",
 	)
-	cmd.Dir = "./source/docs"
+	cmd.Dir = docsRootPath
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err = cmd.Run()
@@ -80,39 +70,23 @@ func serveDocVersion(version string) error {
 	_, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT)
 	defer cancel()
 
-	err := linkContent()
+	unlinkContent, err := linkContent(version)
 	if err != nil {
 		return err
 	}
-	defer func() {
-		err := unlinkContent()
-		if err != nil {
-			clog.Error(err)
-		}
-	}()
+	defer unlinkContent()
 
-	err = os.Symlink(filepath.Join("../..", versionsPathPrefix, version, "content"), "./source/docs/content")
+	unlinkJsonSchema, err := linkJsonSchema(version)
 	if err != nil {
-		return fmt.Errorf("cannot create symlink: %w", err)
+		return err
 	}
-	defer os.Remove("./source/docs/content")
-
-	// this cannot be a symbolic link
-	jsonschemaSource := filepath.Join(versionsPathPrefix, version, "jsonschema")
-	if isDir(jsonschemaSource) {
-		err = copyFiles(jsonschemaSource, "./source/docs/static/jsonschema")
-		if err != nil {
-			return fmt.Errorf("cannot copy jsonschema files: %w", err)
-		}
-		defer os.RemoveAll("./source/docs/static/jsonschema")
-	}
+	defer unlinkJsonSchema()
 
 	cmd := exec.Command(
 		"hugo",
 		"serve",
-		"--themesDir", "../../themes",
 	)
-	cmd.Dir = "./source/docs"
+	cmd.Dir = docsRootPath
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err = cmd.Run()
@@ -123,20 +97,29 @@ func serveDocVersion(version string) error {
 	return nil
 }
 
-func linkContent() error {
-	if isDir("./source/docs/content") {
-		err := os.Rename("./source/docs/content", "./source/docs/content___")
-		if err != nil {
-			return fmt.Errorf("cannot rename content: %w", err)
-		}
+func linkContent(version string) (func() error, error) {
+	err := os.Symlink(filepath.Join("..", versionsPathPrefix, version, "content"), filepath.Join(docsRootPath, contentDirectory))
+	if err != nil {
+		return nil, fmt.Errorf("cannot create symlink: %w", err)
 	}
-	return nil
+	return func() error {
+		return os.Remove(filepath.Join(docsRootPath, contentDirectory))
+	}, nil
 }
 
-func unlinkContent() error {
-	err := os.Rename("./source/docs/content___", "./source/docs/content")
-	if err != nil {
-		return fmt.Errorf("cannot rename content: %w", err)
+func linkJsonSchema(version string) (func() error, error) {
+	// this cannot be a symbolic link
+	jsonschemaSource := filepath.Join(versionsPathPrefix, version, "jsonschema")
+	if isDir(jsonschemaSource) {
+		err := copyFiles(jsonschemaSource, filepath.Join(docsRootPath, "static/jsonschema"))
+		if err != nil {
+			return nil, fmt.Errorf("cannot copy jsonschema files: %w", err)
+		}
+		return func() error {
+			return os.RemoveAll(filepath.Join(docsRootPath, "static/jsonschema"))
+		}, nil
 	}
-	return nil
+	return func() error {
+		return nil
+	}, nil
 }

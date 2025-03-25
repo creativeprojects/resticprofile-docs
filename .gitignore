@@ -1,5 +1,10 @@
 /source
-/themes
 /versions/**/Makefile
+/public
 
+/docs/content
+/docs/static/jsonschema
 /docs/themes
+/docs/hugo.toml
+
+.hugo_build.lock
