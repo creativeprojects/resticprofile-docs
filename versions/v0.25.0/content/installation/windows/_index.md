@@ -28,4 +28,4 @@ scoop install resticprofile
 - Download the package corresponding to your system and CPU from the [release page](https://github.com/creativeprojects/resticprofile/releases)
 - Once downloaded you need to open the archive and copy the binary file `resticprofile` (or `resticprofile.exe`) in your PATH.
 
-{{< pageversions "v0.18.0" "v0.19.0" "v0.20.0" "v0.21.1" "v0.22.0" "v0.23.0" "v0.24.0" "v0.26.0" >}}
+{{< pageversions "v0.18.0" "v0.19.0" "v0.20.0" "v0.21.1" "v0.22.0" "v0.23.0" "v0.24.0" "v0.26.0" "v0.27.1" "v0.28.1" "v0.29.1" >}}

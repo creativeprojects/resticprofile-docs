@@ -29,3 +29,5 @@ Flags declared for the **restic** command line in section *[profile](../profile)
 can be overridden in this section.
 {{% /notice %}}
 
+
+{{< pageversions "v0.29.1" >}}

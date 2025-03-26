@@ -33,3 +33,5 @@ You can download the latest versions from the [releases page](https://github.com
 - solaris/amd64 - `v0.26.0`
 - windows/386
 - windows/amd64
+
+{{< pageversions "v0.27.1" "v0.28.1" >}}

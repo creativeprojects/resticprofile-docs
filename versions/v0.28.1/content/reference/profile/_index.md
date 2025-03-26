@@ -77,3 +77,5 @@ for details).
 Most **restic** command flags defined in profile sections below can also be set at profile level.
 They will be inherited in all sections that define these flags and ignored in all others.
 {{% /notice %}}
+
+{{< pageversions "v0.27.1" "v0.29.1" >}}

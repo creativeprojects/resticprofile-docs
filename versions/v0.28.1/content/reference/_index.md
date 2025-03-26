@@ -16,3 +16,5 @@ The configuration file reference is generated from resticprofile's data model an
 
 {{% children sort="weight" depth="2" %}}
 
+
+{{< pageversions "v0.27.1" "v0.29.1" >}}

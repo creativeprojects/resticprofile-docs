@@ -22,3 +22,5 @@ Schedule configuration structure. Can be used to define schedules in profiles an
 | **systemd-drop-in-files** |one or more `strings` | |Files containing systemd drop-in (override) files - see [schedules/systemd/]({{% relref "/schedules/systemd/" %}}) |
 
 
+
+{{< pageversions "v0.28.1" "v0.29.1" >}}

@@ -83,3 +83,5 @@ according to its manual pages.
 As an alternative to URLs, schemas can be generated locally with: 
 `resticprofile generate --json-schema [--version RESTIC_VERSION] [global|v1|v2]`
 {{% /notice %}}
+
+{{< pageversions "v0.21.1" "v0.22.0" "v0.23.0" "v0.24.0" "v0.25.0" "v0.26.0" "v0.27.1" "v0.28.1" >}}

@@ -12,3 +12,5 @@ weight: 3
 | **value** |`string` | |Value of the header. **Examples**: `"Bearer ..."`, `"Basic ..."`, `"no-cache"`, `"attachment; filename=stats.txt"`, `"application/json"`, `"text/plain"`, `"text/xml"`  |
 
 
+
+{{< pageversions "v0.27.1" "v0.28.1" >}}

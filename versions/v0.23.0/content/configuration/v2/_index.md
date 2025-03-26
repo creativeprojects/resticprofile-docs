@@ -133,4 +133,4 @@ This format leaves more space for improvements later (like a `repos` section may
 You can participate in designing the "version 2" [here](https://github.com/creativeprojects/resticprofile/issues/80)
 {{% /notice %}}
 
-{{< pageversions "v0.19.0" "v0.20.0" "v0.21.1" "v0.22.0" "v0.24.0" "v0.25.0" "v0.26.0" >}}
+{{< pageversions "v0.19.0" "v0.20.0" "v0.21.1" "v0.22.0" "v0.24.0" "v0.25.0" "v0.26.0" "v0.27.1" "v0.28.1" "v0.29.1" >}}

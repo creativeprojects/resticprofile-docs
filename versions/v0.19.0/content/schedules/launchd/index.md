@@ -40,4 +40,4 @@ A launchd daemon is generated when you set `schedule-permission` to `system`.
 
 It consists of a `plist` file in the folder `/Library/LaunchDaemons`. You have to run resticprofile with sudo to `schedule`, check the  `status` and `unschedule` the profile.
 
-{{< pageversions "v0.18.0" "v0.20.0" "v0.21.1" "v0.22.0" "v0.23.0" "v0.24.0" "v0.25.0" "v0.26.0" >}}
+{{< pageversions "v0.18.0" "v0.20.0" "v0.21.1" "v0.22.0" "v0.23.0" "v0.24.0" "v0.25.0" "v0.26.0" "v0.27.1" "v0.28.1" "v0.29.1" >}}

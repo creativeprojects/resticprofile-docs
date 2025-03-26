@@ -58,4 +58,4 @@ From now on the user restic can run **resticprofile** to backup the whole system
 sudo -u restic /home/restic/bin/resticprofile backup
 ```
 
-{{< pageversions "v0.24.0" "v0.25.0" "v0.26.0" >}}
+{{< pageversions "v0.24.0" "v0.25.0" "v0.26.0" "v0.27.1" "v0.28.1" "v0.29.1" >}}

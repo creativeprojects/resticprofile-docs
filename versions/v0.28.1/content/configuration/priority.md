@@ -98,3 +98,5 @@ This either means:
 - you are using a tight security linux distribution which is launching every process inside a new container
 - resticprofile is running in WSL
 - you're running an older version of resticprofile (< `v0.27.0`)
+
+{{< pageversions "v0.26.0" "v0.27.1" "v0.29.1" >}}
