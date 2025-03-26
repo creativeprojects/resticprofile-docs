@@ -198,6 +198,7 @@ func cleanContent(lines [][]byte, removeFirstTitle bool) ([][]byte, bool) {
 				otherLine = true
 			} else if !otherLine && removeFirstTitle {
 				// this is the first title to remove
+				changed = true
 				continue
 			}
 			for _, replacement := range replacements {

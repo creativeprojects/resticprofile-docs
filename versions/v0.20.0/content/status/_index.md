@@ -6,7 +6,7 @@ weight: 30
 ---
 
 
-# Status file for easy monitoring
+
 
 If you need to escalate the result of your backup to a monitoring system, you can definitely use the `run-after` and `run-after-fail` scripting.
 

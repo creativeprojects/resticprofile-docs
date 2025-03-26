@@ -6,7 +6,7 @@ weight: 10
 ---
 
 
-# Configuration file
+
 
 * A configuration is a set of _profiles_.
 * Each profile is in a new section that has the name of the profile.

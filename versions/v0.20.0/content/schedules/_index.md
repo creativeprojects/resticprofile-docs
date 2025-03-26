@@ -6,7 +6,7 @@ weight: 20
 ---
 
 
-# Scheduled backups
+
 
 resticprofile is capable of managing scheduled backups for you using:
 - **launchd** on macOS X
