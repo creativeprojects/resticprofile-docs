@@ -9,6 +9,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"strings"
 
 	"github.com/creativeprojects/clog"
 	"github.com/pelletier/go-toml/v2"
@@ -73,7 +74,7 @@ func cleanupMD(path string) error {
 	if err != nil {
 		return err
 	}
-	var headerTOML, headerYAML, hasHeader bool
+	var headerTOML, headerYAML, hasHeader, fixEndOfYAML bool
 	var bufferTOML, bufferYAML = &bytes.Buffer{}, &bytes.Buffer{}
 	var lineNum int
 	lines := bytes.Split(content, []byte{'\n'})
@@ -98,6 +99,10 @@ func cleanupMD(path string) error {
 				break
 			}
 			continue
+		} else if strings.HasPrefix(lineStr, tagYAML) && hasHeader {
+			// this is a little template bug sticking text right behind the "---" marker
+			fixEndOfYAML = true
+			break
 		}
 		if headerTOML {
 			_, _ = bufferTOML.Write(line)
@@ -130,6 +135,9 @@ func cleanupMD(path string) error {
 	if !hasHeader {
 		// the remaining is the whole content
 		lineNum = 0
+	} else if fixEndOfYAML {
+		lineNum--
+		lines[lineNum] = bytes.TrimPrefix(lines[lineNum], []byte(tagYAML))
 	}
 
 	remainingLines, contentChanged := cleanContent(lines[lineNum:], filepath.Base(path) == "_index.md")

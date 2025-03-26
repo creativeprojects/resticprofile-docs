@@ -25,7 +25,7 @@ func generateDocs(baseURL string) error {
 		return fmt.Errorf("cannot load versions: %w", err)
 	}
 
-	_ = os.RemoveAll(publishDirectory)
+	_ = os.RemoveAll("./public")
 
 	for _, version := range allVersions {
 		clog.Debugf("generating version %s", version)
