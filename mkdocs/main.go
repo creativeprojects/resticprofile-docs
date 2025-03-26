@@ -12,7 +12,7 @@ func main() {
 	var verbose bool
 	var baseURL string
 	pflag.BoolVarP(&verbose, "verbose", "v", false, "display more information")
-	pflag.StringVar(&baseURL, "baseURL", "", "base URL (without version)")
+	pflag.StringVar(&baseURL, "baseURL", defaultBaseURL, "base URL without version")
 	pflag.Parse()
 
 	level := clog.LevelInfo
@@ -41,21 +41,21 @@ func main() {
 		err = prepareTheme()
 
 	case "generate":
-		err = generateDocs()
+		err = generateDocs(baseURL)
 
 	case "serve":
 		version := pflag.Arg(1)
 		if version == "" {
-			clog.Errorf("missing version: mkdocs serve v0.21.0")
-			os.Exit(1)
+			err = serveDirectory("./public")
+		} else {
+			err = serveDocVersion(baseURL, version)
 		}
-		err = serveDocVersion(version)
 
 	case "changelog":
 		err = createReleaseNotes()
 
 	default:
-		clog.Info("please specify any of the commands: [snapshot, cleanup or generate]")
+		clog.Info("please specify any of the commands: [snapshot, cleanup, pageversions, theme, generate, serve or changelog]")
 	}
 	if err != nil {
 		clog.Error(err)

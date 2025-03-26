@@ -57,6 +57,7 @@ func getVersions(from string) ([]string, error) {
 			versions = append(versions, entry.Name())
 		}
 	}
+	slices.Sort(versions)
 	return versions, nil
 }
 
