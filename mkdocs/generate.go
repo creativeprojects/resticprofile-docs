@@ -108,6 +108,7 @@ func serveDocVersion(baseURL, version string) error {
 	cmd := exec.Command(
 		"hugo",
 		"serve",
+		"--disableFastRender",
 	)
 	cmd.Dir = docsRootPath
 	cmd.Stdout = os.Stdout
