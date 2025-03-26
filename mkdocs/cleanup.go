@@ -132,7 +132,7 @@ func cleanupMD(path string) error {
 		lineNum = 0
 	}
 
-	remainingLines, contentChanged := cleanContent(lines[lineNum:])
+	remainingLines, contentChanged := cleanContent(lines[lineNum:], filepath.Base(path) == "_index.md")
 	if headerChanged || contentChanged {
 		clog.Debugf("rewrite needed: %+v\n", header)
 		return rewriteMD(path, header, remainingLines)
@@ -188,29 +188,38 @@ func writeLine(w io.Writer, content []byte) error {
 	return err
 }
 
-func cleanContent(lines [][]byte) ([][]byte, bool) {
+func cleanContent(lines [][]byte, removeFirstTitle bool) ([][]byte, bool) {
 	changed := false
+	otherLine := false // set to true when we're passed the first title line
 	output := make([][]byte, len(lines))
 	for i, line := range lines {
-		for _, replacement := range replacements {
-			switch replacement.Type {
-			case Simple:
-				if bytes.Contains(line, []byte(replacement.From)) {
-					changed = true
-					line = bytes.ReplaceAll(
-						line,
-						[]byte(replacement.From),
-						[]byte(replacement.To),
-					)
-				}
+		if len(bytes.TrimSpace(line)) > 0 {
+			if !bytes.HasPrefix(line, []byte("# ")) {
+				otherLine = true
+			} else if !otherLine && removeFirstTitle {
+				// this is the first title to remove
+				continue
+			}
+			for _, replacement := range replacements {
+				switch replacement.Type {
+				case Simple:
+					if bytes.Contains(line, []byte(replacement.From)) {
+						changed = true
+						line = bytes.ReplaceAll(
+							line,
+							[]byte(replacement.From),
+							[]byte(replacement.To),
+						)
+					}
 
-			case Regexp:
-				pattern := regexp.MustCompile(replacement.From)
-				if pattern.Find(line) != nil {
-					changed = true
-					line = pattern.ReplaceAll(
-						line,
-						[]byte(replacement.To))
+				case Regexp:
+					pattern := regexp.MustCompile(replacement.From)
+					if pattern.Find(line) != nil {
+						changed = true
+						line = pattern.ReplaceAll(
+							line,
+							[]byte(replacement.To))
+					}
 				}
 			}
 		}

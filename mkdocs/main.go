@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 
@@ -11,8 +12,22 @@ import (
 func main() {
 	var verbose bool
 	var baseURL string
-	pflag.BoolVarP(&verbose, "verbose", "v", false, "display more information")
+	pflag.BoolVarP(&verbose, "verbose", "v", false, "display debugging information")
 	pflag.StringVar(&baseURL, "baseURL", defaultBaseURL, "base URL without version")
+
+	pflag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "\nCommands:\n")
+		fmt.Fprintf(os.Stderr, "\tsnapshots\tcreates version snapshots from source git tags, also calls 'cleanup'\n")
+		fmt.Fprintf(os.Stderr, "\tcleanup\t\tcleans all the .md files in a version: cleanup v0.22.0\n")
+		fmt.Fprintf(os.Stderr, "\tpageversions\tgenerates the 'other versions' at the bottom of each page\n")
+		fmt.Fprintf(os.Stderr, "\ttheme\t\tdownloads the hugo theme at the specified version (%s)\n", themeVersionTag)
+		fmt.Fprintf(os.Stderr, "\tgenerate\tbuilds the documentation website into the 'public' directory\n")
+		fmt.Fprintf(os.Stderr, "\tserve\t\tserves local version of the website (from 'public'). If a version is specified it will serve directly from hugo\n")
+		fmt.Fprintf(os.Stderr, "\tchangelog\tcreates the changelog file from release notes on GitHub\n")
+		fmt.Fprintf(os.Stderr, "\nGlobal flags:\n")
+		pflag.PrintDefaults()
+	}
 	pflag.Parse()
 
 	level := clog.LevelInfo
@@ -55,7 +70,7 @@ func main() {
 		err = createReleaseNotes()
 
 	default:
-		clog.Info("please specify any of the commands: [snapshot, cleanup, pageversions, theme, generate, serve or changelog]")
+		pflag.Usage()
 	}
 	if err != nil {
 		clog.Error(err)
