@@ -17,11 +17,9 @@ import (
 	"github.com/go-git/go-git/v5/plumbing"
 )
 
-var (
-	versions = []string{"v0.18.0", "v0.19.0", "v0.20.0", "v0.21.1", "v0.22.0"}
-)
-
 func createSnapshots() error {
+	snapshotVersions := []string{"v0.18.0", "v0.19.0", "v0.20.0", "v0.21.1", "v0.22.0", "v0.23.0", "v0.24.0", "v0.25.0", "v0.26.0", "v0.27.1", "v0.28.1", "v0.29.1"}
+
 	repo, err := openSourceRepo(sourceRepositoryPath)
 	if err != nil {
 		return fmt.Errorf("cannot open source repository: %w", err)
@@ -50,7 +48,7 @@ func createSnapshots() error {
 			clog.Warningf("cannot checkout %q: %s", t.Name(), err)
 		}
 		found, reference := detectDocumentation(version, worktree)
-		if found && slices.Contains(versions, version) {
+		if found && slices.Contains(snapshotVersions, version) {
 			target := filepath.Join(versionsPathPrefix, version)
 			destInfo, err := os.Stat(target)
 

@@ -173,9 +173,9 @@ func generateHugoConfig(baseURL, currentVersion string, allVersions []string) er
 			Title:    currentVersion,
 			IsLatest: currentVersion == latestVersion,
 		},
-		Versions: make([]TemplateVersion, len(versions)),
+		Versions: make([]TemplateVersion, len(allVersions)),
 	}
-	for i, otherVersion := range versions {
+	for i, otherVersion := range allVersions {
 		versionURL := baseURL
 		if otherVersion != latestVersion {
 			versionURL = fmt.Sprintf("%s%s/", baseURL, otherVersion)
