@@ -160,4 +160,4 @@ backup_current:
 {{% /tab %}}
 {{% /tabs %}}
 
-{{< pageversions "v0.22.0" >}}
+{{< pageversions "v0.22.0" "v0.23.0" "v0.24.0" "v0.25.0" "v0.26.0" >}}

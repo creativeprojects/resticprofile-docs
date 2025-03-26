@@ -72,4 +72,4 @@ YAML & TOML validation with JSON schema is not supported out of the box. Additio
 
 **Extension**: `redhat.vscode-yaml`
 
-{{< pageversions "v0.21.1" >}}
+{{< pageversions "v0.21.1" "v0.23.0" "v0.24.0" "v0.25.0" "v0.26.0" >}}

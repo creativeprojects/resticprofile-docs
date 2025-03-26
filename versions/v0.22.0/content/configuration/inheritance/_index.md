@@ -499,4 +499,4 @@ dry-run: /usr/local/bin/restic prune --insecure-tls --repo rest:https://backup-h
 The option `--dry-run` prints restic commands to console or log file. To see what flags are effectively used with each *restic command* involved in *backup*, use `resticprofile --dry-run [<profile-name>.]backup`.
 {{% /notice %}}
 
-{{< pageversions "v0.18.0" "v0.19.0" "v0.20.0" "v0.21.1" >}}
+{{< pageversions "v0.18.0" "v0.19.0" "v0.20.0" "v0.21.1" "v0.23.0" "v0.24.0" "v0.25.0" "v0.26.0" >}}

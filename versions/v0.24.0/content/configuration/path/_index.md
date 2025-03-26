@@ -157,3 +157,5 @@ resticprofile will search for your configuration file in these folders:
 - c:\restic\
 - c:\resticprofile\
 - %USERPROFILE%\
+
+{{< pageversions "v0.18.0" "v0.19.0" "v0.20.0" "v0.21.1" "v0.22.0" "v0.23.0" "v0.25.0" "v0.26.0" >}}

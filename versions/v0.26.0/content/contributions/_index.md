@@ -16,3 +16,5 @@ I have created a [contributions section](https://github.com/creativeprojects/res
 - [send email on systemd timer error](https://github.com/creativeprojects/resticprofile/tree/master/contrib/systemd)
 - [get backup status information in zabbix](https://github.com/creativeprojects/resticprofile/tree/master/contrib/zabbix)
 - [scheduling inside a docker container](https://github.com/creativeprojects/resticprofile/tree/master/contrib/schedule-in-docker)
+
+{{< pageversions "v0.18.0" "v0.19.0" "v0.20.0" "v0.21.1" "v0.22.0" "v0.23.0" "v0.24.0" "v0.25.0" >}}

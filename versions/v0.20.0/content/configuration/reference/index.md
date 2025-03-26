@@ -311,4 +311,4 @@ Flags passed to the restic command line
 
 [^duration]: A duration string is a possibly signed sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "-1.5h" or "2h45m". Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h". 
 
-{{< pageversions "v0.18.0" "v0.19.0" "v0.21.1" "v0.22.0" >}}
+{{< pageversions "v0.18.0" "v0.19.0" "v0.21.1" "v0.22.0" "v0.23.0" "v0.24.0" "v0.25.0" "v0.26.0" >}}

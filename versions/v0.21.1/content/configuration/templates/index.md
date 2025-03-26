@@ -596,4 +596,4 @@ The temporary directory and files returned by the `{{ temp* }}` functions are gu
 
 Please refer to the official documentation for the set of additional default functions provided in go templates. 
 
-{{< pageversions "v0.18.0" "v0.19.0" "v0.20.0" "v0.22.0" >}}
+{{< pageversions "v0.18.0" "v0.19.0" "v0.20.0" "v0.22.0" "v0.23.0" "v0.24.0" "v0.25.0" "v0.26.0" >}}
