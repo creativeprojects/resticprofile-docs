@@ -1,11 +1,14 @@
-{{ if not . }}
 <hr />
 <h5>Other versions of this page</h5>
 <ul>
 {{ range .Params }}
-  <li>
-    <a href="{{ $.Site.BaseURL }}{{ . }}{{ $.Page.RelPermalink -}}" class="highlight">{{ . }}</a>
-  </li>
+  {{ $otherVersion := . }}
+  {{ range $.Site.Params.Versions }}
+    {{ if eq .identifier $otherVersion }}
+    <li>
+      <a href="{{ urls.JoinPath .baseURL $.Page.RelPermalink -}}" class="highlight">{{ $otherVersion }}</a>
+    </li>
+    {{ end }}
+  {{ end }}
 {{ end }}
 </ul>
-{{ end }}
