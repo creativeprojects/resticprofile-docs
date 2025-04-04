@@ -75,7 +75,7 @@ func createReleaseNotes() error {
 }
 
 func cleanBody(input string) string {
-	changelogPattern := regexp.MustCompile(`^(\* ){0,1}([0-9a-f]+) `)
+	changelogPattern := regexp.MustCompile(`^(\* ){0,1}([0-9a-f]+) (.+)$`)
 	output := &strings.Builder{}
 	lines := strings.Split(input, "\n")
 	changelog := false
@@ -85,7 +85,7 @@ func cleanBody(input string) string {
 			changelog = true
 		}
 		if changelog {
-			line = changelogPattern.ReplaceAllString(line, "* [$2](https://github.com/creativeprojects/resticprofile/commit/$2) ")
+			line = changelogPattern.ReplaceAllString(line, "* [$3](https://github.com/creativeprojects/resticprofile/commit/$2)")
 		} else {
 			// remove links to old documentation
 			line = regexp.MustCompile(`\[(.*?)\]\(https://github\.com/creativeprojects/resticprofile/tree.*?\)`).ReplaceAllString(line, "$1")
