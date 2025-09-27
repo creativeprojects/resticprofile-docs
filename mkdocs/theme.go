@@ -13,7 +13,7 @@ import (
 	"strings"
 
 	"github.com/creativeprojects/clog"
-	"github.com/google/go-github/v69/github"
+	"github.com/google/go-github/v75/github"
 )
 
 func prepareTheme() error {

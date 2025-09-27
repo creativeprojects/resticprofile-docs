@@ -10,7 +10,7 @@ const (
 	hugoConfigFile       = docsRootPath + "/hugo.toml"
 	publishDirectory     = "../public"
 	sourceRepositoryURL  = "https://github.com/creativeprojects/resticprofile.git"
-	themeVersionTag      = "7.6.0"
+	themeVersionTag      = "8.0.1"
 	themeRepositoryOwner = "McShelby"
 	themeRepositoryName  = "hugo-theme-relearn"
 	defaultBaseURL       = "https://dev.resticprofile.pages.dev/"

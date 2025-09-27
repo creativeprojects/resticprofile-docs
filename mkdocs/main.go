@@ -18,7 +18,7 @@ func main() {
 	pflag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
 		fmt.Fprintf(os.Stderr, "\nCommands:\n")
-		fmt.Fprintf(os.Stderr, "\tsnapshots\tcreates version snapshots from source git tags, also calls 'cleanup'\n")
+		fmt.Fprintf(os.Stderr, "\tsnapshot\tcreates version snapshots from source git tags, also calls 'cleanup'\n")
 		fmt.Fprintf(os.Stderr, "\tcleanup\t\tcleans all the .md files in a version: cleanup v0.22.0\n")
 		fmt.Fprintf(os.Stderr, "\tpageversions\tgenerates the 'other versions' at the bottom of each page\n")
 		fmt.Fprintf(os.Stderr, "\ttheme\t\tdownloads the hugo theme at the specified version (%s)\n", themeVersionTag)
