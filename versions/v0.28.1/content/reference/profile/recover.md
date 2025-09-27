@@ -30,4 +30,4 @@ can be overridden in this section.
 {{% /notice %}}
 
 
-{{< pageversions "v0.27.1" "v0.29.1" >}}
+{{< pageversions "v0.27.1" "v0.29.1" "v0.30.1" "v0.31.0" "v0.32.0" >}}

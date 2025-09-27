@@ -34,3 +34,5 @@ It's easy to spot a terminal window opened with Administrator privileges:
 
 > [!IMPORTANT]
 > Running the schedule command might cause Windows to delete _resticprofile.exe_, treating it as a threat.
+
+{{< pageversions "v0.31.0" "v0.32.0" >}}

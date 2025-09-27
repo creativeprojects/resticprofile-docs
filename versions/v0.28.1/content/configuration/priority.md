@@ -99,4 +99,4 @@ This either means:
 - resticprofile is running in WSL
 - you're running an older version of resticprofile (< `v0.27.0`)
 
-{{< pageversions "v0.26.0" "v0.27.1" "v0.29.1" >}}
+{{< pageversions "v0.26.0" "v0.27.1" "v0.29.1" "v0.30.1" "v0.31.0" "v0.32.0" >}}

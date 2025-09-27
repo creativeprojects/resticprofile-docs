@@ -229,3 +229,5 @@ root:
 
 
 This adds the `host` label to all your metrics.
+
+{{< pageversions "v0.32.0" >}}

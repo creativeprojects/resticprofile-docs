@@ -44,3 +44,5 @@ Available URLs:
  * https://creativeprojects.github.io/resticprofile/jsonschema/config-1-restic-0-9.json
 
 
+
+{{< pageversions "v0.27.1" "v0.28.1" "v0.29.1" "v0.30.1" "v0.31.0" >}}

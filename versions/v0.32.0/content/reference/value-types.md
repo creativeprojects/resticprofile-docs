@@ -40,3 +40,5 @@ in `[type]`.
 
 **Type**: `key` => `value`
 : Is a value that is configuration structure of `string` keys and values of any type.
+
+{{< pageversions "v0.27.1" "v0.28.1" "v0.29.1" "v0.30.1" "v0.31.0" >}}

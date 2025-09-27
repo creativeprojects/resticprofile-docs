@@ -26,3 +26,5 @@ Once you grant permission, the profile will run normally until you update restic
 A launchd daemon is generated when you set `schedule-permission` to `system`. It consists of a `plist` file in `/Library/LaunchDaemons`.
 
 Run resticprofile with sudo to `schedule` and `unschedule` the profile. You can schedule and unschedule system and user profiles simultaneously using the `schedule --all` command.
+
+{{< pageversions "v0.18.0" "v0.19.0" "v0.20.0" "v0.21.1" "v0.22.0" "v0.23.0" "v0.24.0" "v0.25.0" "v0.26.0" "v0.27.1" "v0.28.1" "v0.29.1" "v0.31.0" "v0.32.0" >}}
